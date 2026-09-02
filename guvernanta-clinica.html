@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guvernanță Clinică — Veya Journey®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15221A; --ink-soft:#3B4A3F; --paper:#F1EFE6; --paper-raised:#FBFAF5;
+    --sage:#E4E7DB; --sage-line:#CDD2C1; --moss:#4F6B53; --moss-dark:#374A3B;
+    --moss-tint:#DDE5DC; --path:#A97A52; --path-tint:#EFE1D3;
+    --line: rgba(21,34,26,0.14); --max: 860px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Source Serif 4', Georgia, serif; font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased;}
+  a{color:var(--moss-dark);}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+  h1,h2,h3,h4,.display{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em; color:var(--ink);}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-dark); display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:16px; height:1px; background:var(--path); display:inline-block;}
+  header{position:sticky; top:0; z-index:50; background:rgba(241,239,230,0.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  nav.wrap{display:flex; align-items:center; justify-content:space-between; height:72px;}
+  .logo{font-family:'Space Grotesk', sans-serif; font-weight:700; font-size:19px; text-decoration:none; color:var(--ink); display:flex; align-items:center; gap:8px;}
+  .back-link{font-family:'Space Grotesk', sans-serif; font-size:14px; font-weight:500; text-decoration:none; color:var(--ink-soft);}
+  main{padding:56px 0 100px;}
+  .doc-head{border-bottom:1px solid var(--line); padding-bottom:28px; margin-bottom:36px;}
+  .doc-head h1{font-size:clamp(28px,4vw,40px); margin-top:14px;}
+  .doc-meta{margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft); line-height:1.9;}
+  section{margin-bottom:34px;}
+  h2{font-size:21px; margin-bottom:12px; margin-top:6px;}
+  h3{font-size:17px; margin-bottom:8px; margin-top:18px;}
+  p{margin-bottom:12px; color:var(--ink-soft);}
+  ul,ol{margin:0 0 12px 22px; color:var(--ink-soft);}
+  li{margin-bottom:6px;}
+  strong{color:var(--ink);}
+  table{width:100%; border-collapse:collapse; margin:14px 0 20px; font-size:15.5px;}
+  th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{font-family:'Space Grotesk',sans-serif; font-size:13px; letter-spacing:0.02em; color:var(--ink); background:var(--sage);}
+  .callout{background:var(--paper-raised); border:1px solid var(--sage-line); border-left:3px solid var(--moss); border-radius:2px; padding:16px 18px; margin:16px 0; font-size:15.5px;}
+  .callout p{margin-bottom:0; color:var(--ink-soft);}
+  .toc{background:var(--paper-raised); border:1px solid var(--sage-line); border-radius:2px; padding:20px 24px; margin-bottom:36px;}
+  .toc h4{font-size:13px; text-transform:uppercase; letter-spacing:0.08em; font-family:'IBM Plex Mono',monospace; color:var(--moss-dark); margin-bottom:10px;}
+  .toc ol{margin-left:18px; font-size:15px;}
+  .toc a{text-decoration:none;}
+  .toc a:hover{text-decoration:underline;}
+  .badge{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; letter-spacing:0.04em; text-transform:uppercase; background:var(--moss-tint); color:var(--moss-dark); padding:3px 9px; border-radius:2px; margin-bottom:4px;}
+  footer{border-top:1px solid var(--line); padding:28px 0; font-size:13px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+</style>
+</head>
+<body>
+<header>
+  <nav class="wrap">
+    <a href="#" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/><circle cx="21" cy="6" r="2" fill="#A97A52"/></svg>
+      Veya Journey®
+    </a>
+    <a href="index.html" class="back-link">← Înapoi la site</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="doc-head">
+      <p class="eyebrow">Document intern & public — Guvernanță clinică</p>
+      <h1>Guvernanță Clinică</h1>
+      <div class="doc-meta">
+        Ultima revizuire: 12 iulie 2026 &nbsp;·&nbsp; Următoarea revizuire programată: 12 ianuarie 2027<br>
+        Deținut de: Directorul Medical, Veya Tech Ltd. dba Veya Journey®
+      </div>
+    </div>
+
+    <div class="callout">
+      <p>Acest document descrie modul în care Veya Journey® își organizează și supraveghează activitatea clinică — standardele de prescriere, supravegherea medicilor, siguranța pacientului și procesul de reclamații. Este disponibil public pentru transparență față de pacienți, autorități și parteneri, și este revizuit periodic de echipa noastră medicală.</p>
+    </div>
+
+    <div class="callout">
+      <p>Platforma Veya Journey® este operată de <strong>Veya Tech Ltd.</strong> (societate înregistrată în Anglia și Țara Galilor sub numărul 16491518, cu sediul social la Brookfield Court, Selby Road, Garforth, Leeds, Anglia, LS25 1NB, Regatul Unit). Prescripția dumneavoastră, atunci când este justificată din punct de vedere medical, este emisă de un medic autorizat afiliat <strong>HI DOCTOR AI SL</strong>, care furnizează servicii de consultație medicală online prin intermediul unor medici licențiați și autorizați să practice medicina în Uniunea Europeană; toate prescripțiile sunt emise exclusiv de medici înregistrați, în conformitate cu legislația aplicabilă a Uniunii Europene și cu legislația națională în vigoare. Medicația dumneavoastră este eliberată și expediată de <strong>HYPERICI FARM SRL</strong>, farmacie autorizată cu sediul în județul Dâmbovița, România, în conformitate cu legislația farmaceutică și cu cerințele autorităților competente din România.</p>
+    </div>
+
+    <div class="toc">
+      <h4>Cuprins</h4>
+      <ol>
+        <li><a href="#g1">Scop și domeniu de aplicare</a></li>
+        <li><a href="#g2">Structura de guvernanță clinică</a></li>
+        <li><a href="#g3">Standarde de prescriere</a></li>
+        <li><a href="#g4">Verificarea și supravegherea clinicienilor</a></li>
+        <li><a href="#g5">Siguranța pacientului și farmacovigilență</a></li>
+        <li><a href="#g6">Guvernanța farmaciei</a></li>
+        <li><a href="#g7">Asigurarea calității și audit</a></li>
+        <li><a href="#g8">Procedura de reclamații</a></li>
+        <li><a href="#g9">Conformitate reglementară</a></li>
+        <li><a href="#g10">Formare continuă</a></li>
+        <li><a href="#g11">Revizuirea acestui document</a></li>
+      </ol>
+    </div>
+
+    <section id="g1">
+      <h2>1. Scop și domeniu de aplicare</h2>
+      <p>Guvernanța clinică reprezintă cadrul prin care Veya Journey® se asigură că fiecare pacient primește o evaluare medicală sigură, corectă și responsabilă, iar tratamentul este prescris și eliberat exclusiv atunci când este justificat clinic. Acest cadru se aplică tuturor medicilor, farmaciștilor și personalului implicat în evaluarea, prescrierea, prepararea și livrarea tratamentului prin platforma Veya Journey®.</p>
+    </section>
+
+    <section id="g2">
+      <h2>2. Structura de guvernanță clinică</h2>
+      <table>
+        <tr><th>Rol</th><th>Responsabilitate</th></tr>
+        <tr><td>Director Medical (HI DOCTOR AI SL)</td><td>Răspunde de standardele clinice, aprobă protocoalele de prescriere, supraveghează deciziile medicilor licențiați afiliați HI DOCTOR AI SL și reprezintă activitatea clinică în relația cu autoritățile medicale.</td></tr>
+        <tr><td>Farmacist-șef (HYPERICI FARM SRL)</td><td>Răspunde de conformitatea farmaceutică, aprovizionarea prin canale autorizate, prepararea și eliberarea corectă a tratamentelor.</td></tr>
+        <tr><td>Comitetul de Guvernanță Clinică</td><td>Format din Directorul Medical (HI DOCTOR AI SL), Farmacistul-șef (HYPERICI FARM SRL) și un reprezentant al echipei de conformitate a Veya Tech Ltd.; se întrunește trimestrial pentru a revizui incidentele, reclamațiile și indicatorii de calitate.</td></tr>
+        <tr><td>Responsabil pentru Protecția Datelor (Veya Tech Ltd.)</td><td>Supraveghează conformitatea prelucrării datelor medicale cu GDPR și legislația română conexă.</td></tr>
+      </table>
+    </section>
+
+    <section id="g3">
+      <h2>3. Standarde de prescriere</h2>
+      <p>Prescrierea tratamentelor din clasa GLP-1 / agoniști ai receptorilor de incretină — în prezent, tirzepatidă (Mounjaro), iar, ulterior autorizării sale în Uniunea Europeană, și retatrutidă — urmează un protocol clinic scris, aprobat de Directorul Medical, care include cel puțin:</p>
+      <ul>
+        <li><strong>Criterii de includere</strong> — de regulă, indice de masă corporală (IMC) minim conform ghidurilor clinice recunoscute pentru tratamentul obezității și al supraponderii cu comorbidități asociate;</li>
+        <li><strong>Criterii de excludere / contraindicații</strong> — sarcină, alăptare, istoric personal sau familial de neoplazie endocrină multiplă de tip 2 sau carcinom medular tiroidian, antecedente de pancreatită, alte contraindicații specifice conform Rezumatului Caracteristicilor Produsului (RCP);</li>
+        <li><strong>Verificarea identității și a istoricului medical</strong> raportat de pacient, inclusiv medicația curentă și alergiile;</li>
+        <li><strong>Posibilitatea de a solicita informații sau documente medicale suplimentare</strong> înainte de aprobare, atunci când răspunsurile din evaluare o impun;</li>
+        <li><strong>Titrare progresivă a dozei</strong> și reevaluare clinică periodică pe durata tratamentului;</li>
+        <li><strong>Dreptul oricărui medic de a refuza prescrierea</strong> atunci când, în opinia sa profesională, tratamentul nu este adecvat sau sigur pentru pacientul respectiv, indiferent de răspunsurile din formular.</li>
+      </ul>
+      <div class="callout"><p><strong>Notă privind statusul reglementar:</strong> protocolul de prescriere a tirzepatidei (Mounjaro) este activ operațional, medicamentul fiind autorizat și disponibil prin lanțul farmaceutic autorizat. Protocolul de prescriere a retatrutidei va fi activat operațional numai după obținerea autorizației de punere pe piață în Uniunea Europeană și confirmarea disponibilității comerciale prin lanțul farmaceutic autorizat; până atunci, acest protocol rămâne în etapă de pregătire și validare internă.</p></div>
+    </section>
+
+    <section id="g4">
+      <h2>4. Verificarea și supravegherea clinicienilor</h2>
+      <ul>
+        <li>Toți medicii care efectuează evaluări și consultații pentru Veya Journey®, prin intermediul HI DOCTOR AI SL, trebuie să fie înregistrați activ la colegiul medicilor competent din statul membru al Uniunii Europene în care sunt licențiați și să dețină drept de liberă practică valabil.</li>
+        <li>HI DOCTOR AI SL verifică, înainte de colaborare și periodic ulterior, statusul de înregistrare, specializarea și eventualele restricții disciplinare ale fiecărui medic colaborator.</li>
+        <li>Deciziile clinice sunt documentate integral în dosarul electronic al pacientului, incluzând motivația aprobării sau respingerii tratamentului.</li>
+        <li>Un eșantion de decizii clinice este revizuit periodic de Directorul Medical, ca parte a auditului intern de calitate.</li>
+      </ul>
+    </section>
+
+    <section id="g5">
+      <h2>5. Siguranța pacientului și farmacovigilență</h2>
+      <ul>
+        <li>Pacienții sunt informați clar cu privire la reacțiile adverse frecvente și la semnele care impun contactarea imediată a echipei medicale sau a serviciilor de urgență.</li>
+        <li>Orice reacție adversă raportată de pacient este documentată și evaluată de un medic; cazurile care întrunesc criteriile de raportare sunt transmise Agenției Naționale a Medicamentului și a Dispozitivelor Medicale din România (ANMDMR), conform obligațiilor de farmacovigilență prevăzute de Legea nr. 95/2006 și de legislația europeană aplicabilă (Regulamentul (UE) nr. 726/2004 și Directiva 2010/84/UE).</li>
+        <li>Pacienților li se comunică explicit că serviciile Veya Journey® nu înlocuiesc asistența medicală de urgență și că, în caz de urgență, trebuie să apeleze 112 sau să se prezinte la cea mai apropiată unitate medicală.</li>
+      </ul>
+    </section>
+
+    <section id="g6">
+      <h2>6. Guvernanța farmaciei</h2>
+      <ul>
+        <li>Medicamentele sunt aprovizionate exclusiv prin canale farmaceutice autorizate, verificate de Farmacistul-șef.</li>
+        <li>HYPERICI FARM SRL, farmacia parteneră, operează sub licența corespunzătoare, conform Legii farmaciei nr. 266/2008 și normelor Colegiului Farmaciștilor din România.</li>
+        <li>Fiecare eliberare este condiționată de existența unei prescripții medicale valide, emise pentru pacientul respectiv.</li>
+        <li>Ambalarea produselor respectă cerințele de trasabilitate și de identificare unică prevăzute de legislația europeană privind medicamentele falsificate (Directiva 2011/62/UE și Regulamentul delegat (UE) 2016/161).</li>
+      </ul>
+    </section>
+
+    <section id="g7">
+      <h2>7. Asigurarea calității și audit</h2>
+      <p>Comitetul de Guvernanță Clinică revizuiește trimestrial un set de indicatori de calitate, printre care: rata de aprobare/respingere a evaluărilor, timpul mediu de răspuns al medicilor, numărul și natura reclamațiilor primite, evenimentele adverse raportate și rezultatele auditului intern al deciziilor de prescriere. Constatările sunt documentate, iar acțiunile corective sunt urmărite până la implementare.</p>
+    </section>
+
+    <section id="g8">
+      <h2>8. Procedura de reclamații</h2>
+      <p>Orice pacient sau terț poate depune o reclamație privind un aspect clinic sau al serviciului, urmând pașii de mai jos:</p>
+      <ol>
+        <li><strong>Depunerea reclamației</strong> — prin contul de pacient, e-mail sau linia de asistență, cu o descriere a problemei semnalate.</li>
+        <li><strong>Confirmarea primirii</strong> — în termen de 2 zile lucrătoare de la primire.</li>
+        <li><strong>Analiza</strong> — reclamațiile cu implicații clinice sunt analizate de Directorul Medical sau de un medic desemnat; reclamațiile de natură farmaceutică, de Farmacistul-șef.</li>
+        <li><strong>Răspuns</strong> — în termen de cel mult 10 zile lucrătoare de la primire, cu concluziile analizei și, dacă este cazul, măsurile corective adoptate. Pentru cazuri complexe, termenul poate fi prelungit, cu informarea reclamantului asupra motivului și a noului termen estimat.</li>
+        <li><strong>Escaladare</strong> — dacă pacientul nu este mulțumit de răspuns, poate solicita revizuirea de către Comitetul de Guvernanță Clinică, sau se poate adresa direct autorităților competente (Ministerul Sănătății, Direcția de Sănătate Publică, Colegiul Medicilor din România sau Colegiul Farmaciștilor din România, după caz).</li>
+      </ol>
+    </section>
+
+    <section id="g9">
+      <h2>9. Conformitate reglementară</h2>
+      <p>Serviciile clinice furnizate prin Veya Journey® se desfășoară în baza autorizațiilor de funcționare obținute de HI DOCTOR AI SL pentru furnizarea de servicii medicale private la distanță și de HYPERICI FARM SRL pentru activitatea de farmacie, în conformitate cu:</p>
+      <ul>
+        <li>Legea nr. 95/2006 privind reforma în domeniul sănătății, republicată;</li>
+        <li>Legea nr. 46/2003 privind drepturile pacientului;</li>
+        <li>Legea farmaciei nr. 266/2008, republicată;</li>
+        <li>Normele Colegiului Medicilor din România și ale Colegiului Farmaciștilor din România;</li>
+        <li>Regulamentul (UE) 2016/679 (GDPR) și Legea nr. 190/2018;</li>
+        <li>Legislația europeană privind medicamentele, inclusiv normele privind farmacovigilența și trasabilitatea produselor.</li>
+      </ul>
+    </section>
+
+    <section id="g10">
+      <h2>10. Formare continuă</h2>
+      <p>Medicii și farmaciștii colaboratori sunt încurajați și, acolo unde este cazul, obligați contractual să își mențină educația medicală continuă (EMC) conform cerințelor Colegiului Medicilor din România, respectiv ale Colegiului Farmaciștilor din România, și să parcurgă periodic materiale interne de actualizare privind protocoalele Veya Journey®.</p>
+    </section>
+
+    <section id="g11">
+      <h2>11. Revizuirea acestui document</h2>
+      <p>Acest document este revizuit cel puțin semestrial de Comitetul de Guvernanță Clinică sau ori de câte ori intervine o modificare legislativă, clinică sau operațională relevantă. Versiunea publică reflectă întotdeauna cadrul de guvernanță aflat în vigoare.</p>
+      <p>Pentru întrebări privind acest document, ne poți contacta la adresa indicată în secțiunea de contact a site-ului.</p>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Veya Tech Ltd. dba Veya Journey® — Toate drepturile rezervate &nbsp;·&nbsp; Contact: 0316 114 118 | help@veyajourney.ro</div>
+</footer>
+</body>
+</html>

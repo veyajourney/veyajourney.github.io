@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activează-ți planul — Veya Journey®</title>
+<meta name="description" content="Prescripția ta a fost aprobată. Alege planul de tratament potrivit pentru tine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15221A;
+    --ink-soft:#3B4A3F;
+    --paper:#F1EFE6;
+    --paper-raised:#FBFAF5;
+    --sage:#E4E7DB;
+    --sage-line:#CDD2C1;
+    --moss:#4F6B53;
+    --moss-dark:#374A3B;
+    --moss-tint:#DDE5DC;
+    --path:#A97A52;
+    --path-tint:#EFE1D3;
+    --line: rgba(21,34,26,0.14);
+    --shadow: 0 1px 2px rgba(21,34,26,0.06);
+    --max: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  h1,h2,h3,h4,.display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--moss-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px; height:1px; background:var(--path);
+    display:inline-block;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:2px;
+    border:1px solid transparent;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--paper-raised);}
+  .btn-primary:hover{background:var(--moss-dark);}
+  .btn-primary:disabled{background:var(--sage-line); color:#8B9088; cursor:not-allowed; transform:none;}
+  .btn-ghost{background:transparent; border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .btn-arrow{transition:transform .18s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+
+  /* ---------- HEADER / ACCOUNT BAR ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,239,230,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+    gap:20px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    display:flex; align-items:center; gap:9px;
+    text-decoration:none;
+    flex-shrink:0;
+  }
+  .logo-mark{width:22px; height:22px;}
+
+  .account-chip{
+    display:flex; align-items:center; gap:12px;
+    padding:7px 8px 7px 16px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:30px;
+    flex-shrink:0;
+  }
+  .account-chip .id-text{text-align:right; line-height:1.25;}
+  .account-chip .id-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:14px;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .account-chip .id-number{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+    white-space:nowrap;
+  }
+  .account-avatar{
+    width:34px; height:34px; border-radius:50%;
+    background:var(--moss-tint);
+    color:var(--moss-dark);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:13px;
+    flex-shrink:0;
+  }
+  @media (max-width:600px){
+    .account-chip .id-text{display:none;}
+    .account-chip{padding:6px;}
+  }
+
+  /* ---------- STATUS BANNER ---------- */
+  .status-banner{
+    background:var(--moss-tint);
+    border-bottom:1px solid var(--sage-line);
+  }
+  .status-banner .wrap{
+    display:flex; align-items:center; gap:12px;
+    padding:14px 32px;
+    font-size:14.5px;
+    color:var(--moss-dark);
+  }
+  .status-banner svg{width:18px; height:18px; flex-shrink:0;}
+  .status-banner strong{font-family:'Space Grotesk',sans-serif; font-weight:600;}
+
+  /* ---------- PAGE HEAD ---------- */
+  .page-head{padding:64px 0 8px;}
+  .page-head .eyebrow{margin-bottom:16px;}
+  .page-head h1{font-size:clamp(30px,3.6vw,42px); line-height:1.15; max-width:20ch;}
+  .page-head p{margin-top:16px; color:var(--ink-soft); font-size:16.5px; max-width:56ch;}
+
+  /* ---------- PRESCRIPTION SUMMARY ---------- */
+  section{padding:40px 0;}
+  .rx-card{
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:26px 30px;
+    margin-top:36px;
+  }
+  .rx-icon{
+    width:44px; height:44px; border-radius:50%;
+    background:var(--moss); color:var(--paper-raised);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .rx-icon svg{width:22px; height:22px;}
+  .rx-info{flex:1; min-width:220px;}
+  .rx-info h4{font-size:17px; margin-bottom:4px;}
+  .rx-info p{font-size:14.5px; color:var(--ink-soft);}
+  .rx-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--ink-soft);
+    text-align:right;
+  }
+
+  /* ---------- PLAN GRID ---------- */
+  .plan-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:24px;
+    margin-top:20px;
+  }
+  .plan-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:32px 28px;
+    display:flex; flex-direction:column;
+    cursor:pointer;
+    transition:border-color .15s ease, box-shadow .15s ease;
+    position:relative;
+  }
+  .plan-card:hover{border-color:var(--moss);}
+  .plan-card.selected{
+    border-color:var(--moss);
+    box-shadow:0 4px 24px rgba(21,34,26,0.1);
+  }
+  .plan-card .check{
+    position:absolute; top:24px; right:24px;
+    width:22px; height:22px; border-radius:50%;
+    border:1.5px solid var(--sage-line);
+    background:var(--paper-raised);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .plan-card.selected .check{background:var(--moss); border-color:var(--moss);}
+  .plan-card .check svg{width:12px; height:12px; color:var(--paper-raised); opacity:0; transition:opacity .15s ease;}
+  .plan-card.selected .check svg{opacity:1;}
+  .plan-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--moss-dark);
+    background:var(--moss-tint);
+    padding:5px 10px;
+    border-radius:2px;
+    display:inline-block;
+    width:fit-content;
+    margin-bottom:18px;
+  }
+  .plan-card h3{font-size:22px; margin-bottom:6px; padding-right:30px;}
+  .plan-price{font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--ink-soft); margin-bottom:18px;}
+  .plan-price strong{font-size:26px; color:var(--ink); font-weight:600;}
+  .plan-card ul{list-style:none; margin-bottom:6px; flex-grow:1;}
+  .plan-card ul li{
+    display:flex; gap:9px; align-items:flex-start;
+    font-size:14.5px; color:var(--ink-soft);
+    padding:7px 0;
+  }
+  .plan-card ul li svg{width:15px;height:15px;margin-top:3px;flex-shrink:0;color:var(--moss);}
+  @media (max-width:760px){ .plan-grid{grid-template-columns:1fr;} }
+
+  /* ---------- ACTIVATION SUMMARY BAR ---------- */
+  .activate-bar{
+    position:sticky; bottom:0; z-index:40;
+    background:var(--paper-raised);
+    border-top:1px solid var(--line);
+    box-shadow:0 -2px 16px rgba(21,34,26,0.06);
+    margin-top:48px;
+  }
+  .activate-bar .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:20px; flex-wrap:wrap;
+    padding:20px 32px;
+  }
+  .activate-summary .label{font-family:'IBM Plex Mono', monospace; font-size:11.5px; color:var(--ink-soft); letter-spacing:.04em;}
+  .activate-summary .value{font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:600; margin-top:2px;}
+  .activate-summary .value span{font-size:13px; font-weight:500; color:var(--ink-soft);}
+
+  .safety{
+    background:var(--sage);
+    padding:22px 0;
+    border-top:1px solid var(--sage-line);
+    margin-top:0;
+  }
+  .safety .wrap{display:flex; gap:14px; align-items:flex-start;}
+  .safety svg{width:20px; height:20px; color:var(--moss-dark); flex-shrink:0; margin-top:2px;}
+  .safety p{font-size:13.5px; color:var(--ink-soft);}
+  .safety strong{color:var(--ink);}
+
+  footer{padding:32px 0; }
+  footer .wrap{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);
+  }
+
+  /* ---------- REDIRECT LOADER ---------- */
+  .loader{
+    position:fixed; inset:0; z-index:999;
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .3s ease, visibility .3s ease;
+  }
+  .loader.visible{opacity:1; visibility:visible; pointer-events:all;}
+  .loader-inner{display:flex; flex-direction:column; align-items:center; gap:18px; text-align:center; padding:0 24px;}
+  .loader-mark{width:64px; height:64px;}
+  .loader-path{
+    stroke-dasharray:70;
+    stroke-dashoffset:0;
+    animation:loaderDraw 1.4s ease-in-out infinite;
+  }
+  .loader-dot{
+    animation:loaderDot 1.4s ease-in-out infinite;
+    transform-origin:21px 6px;
+  }
+  @keyframes loaderDraw{
+    0%{ stroke-dashoffset:70; }
+    55%{ stroke-dashoffset:0; }
+    100%{ stroke-dashoffset:-70; }
+  }
+  @keyframes loaderDot{
+    0%, 100%{ transform:scale(0.85); opacity:.6; }
+    50%{ transform:scale(1.15); opacity:1; }
+  }
+  .loader-text{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px;}
+  .loader-subtext{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft); max-width:38ch;}
+  @media (prefers-reduced-motion: reduce){
+    .loader-path, .loader-dot{ animation:none; }
+  }
+
+  /* ---------- MOBILE REFINEMENTS ---------- */
+  @media (max-width:600px){
+    .wrap{padding:0 20px;}
+    nav.wrap{height:64px;}
+    .page-head{padding:36px 0 4px;}
+    .page-head p{font-size:15.5px;}
+    .rx-card{padding:20px; gap:14px;}
+    .rx-meta{text-align:left; width:100%; border-top:1px solid var(--line); padding-top:12px; margin-top:4px;}
+    .plan-card{padding:24px 20px;}
+    .activate-bar .wrap{padding:16px 20px; flex-direction:column; align-items:stretch;}
+    .activate-summary{text-align:center;}
+    .activate-bar .btn{width:100%;}
+    footer .wrap{flex-direction:column; text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="loader" id="redirectLoader" aria-hidden="true" role="status">
+  <div class="loader-inner">
+    <svg class="loader-mark" viewBox="0 0 24 24" fill="none">
+      <path class="loader-path" d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/>
+      <circle class="loader-dot" cx="21" cy="6" r="2" fill="#A97A52"/>
+    </svg>
+    <div class="loader-text">Se activează planul tău...</div>
+    <div class="loader-subtext">Te redirecționăm către Stripe pentru finalizarea plății în siguranță.</div>
+  </div>
+</div>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none">
+        <path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="21" cy="6" r="2" fill="#A97A52"/>
+      </svg>
+      Veya Journey®
+    </a>
+    <div class="account-chip" id="accountChip">
+      <div class="account-avatar" id="accountAvatar">AP</div>
+      <div class="id-text">
+        <div class="id-name" id="accountName">Andrei Popescu</div>
+        <div class="id-number" id="accountNumber">Cont · 12345678</div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<div class="status-banner">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+    <span><strong>Prescripția ta a fost aprobată</strong> de medicul evaluator. Următorul pas: alege planul de tratament.</span>
+  </div>
+</div>
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">Activare plan</p>
+    <h1>Alege planul potrivit pentru tratamentul tău</h1>
+    <p>Medicul tău a confirmat eligibilitatea și a stabilit tratamentul recomandat. Alege planul lunar care ți se potrivește — poți pune pauză sau anula oricând, iar prima livrare pleacă din farmacie imediat după activare.</p>
+
+    <div class="rx-card">
+      <div class="rx-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+      </div>
+      <div class="rx-info">
+        <h4>Mounjaro® — doza ta aprobată: <span id="approvedDose">5 mg</span></h4>
+        <p>Concentrația a fost stabilită de medicul evaluator și este deja integrată în stiloul injector Veya. Poate fi ajustată la evaluările periodice, dacă medicul consideră necesar.</p>
+      </div>
+      <div class="rx-meta">
+        APROBAT · <span id="approvalDate">14 IUL 2026</span><br>
+        REF. PRESCRIPȚIE #RX-12345678-1
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="plan-grid" id="planGrid">
+      <div class="plan-card selected" data-plan="standard" data-price="649.90" data-label="Veya® Standard" tabindex="0" role="button" aria-pressed="true">
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="plan-tag">Cel mai ales</span>
+        <h3>Veya® Standard</h3>
+        <div class="plan-price"><strong>649.90 lei</strong>/lună</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Mounjaro®, orice doză — preț neschimbat</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Evaluări medicale lunare</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Livrare rapidă, ambalaj discret</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Pauză sau anulare oricând</li>
+        </ul>
+      </div>
+      <div class="plan-card" data-plan="plus" data-price="899.90" data-label="Veya® Plus" tabindex="0" role="button" aria-pressed="false">
+        <span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="plan-tag">Sprijin complet</span>
+        <h3>Veya® Plus</h3>
+        <div class="plan-price"><strong>899.90 lei</strong>/lună</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Tot ce include Veya® Standard, la același preț indiferent de doză</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Coaching nutrițional individual</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Urmărirea obiceiurilor și a progresului</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Pauză sau anulare oricând</li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:22px; font-size:13px; color:var(--ink-soft);">Prețul include medicația, evaluările medicale periodice și livrarea și <strong>rămâne același indiferent de concentrația (doza) prescrisă de medic</strong>. Se facturează lunar; poți pune pauză sau anula planul în orice moment din contul tău.</p>
+  </div>
+</section>
+
+<div class="activate-bar">
+  <div class="wrap">
+    <div class="activate-summary">
+      <div class="label">PLAN SELECTAT</div>
+      <div class="value" id="summaryLabel">Veya® Standard <span>· 649.90 lei/lună</span></div>
+    </div>
+    <a href="#" class="btn btn-primary" id="activateBtn">Activează planul <span class="btn-arrow">→</span></a>
+  </div>
+</div>
+
+<div class="safety">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+    <p><strong>Informații importante de siguranță.</strong> Medicamentele de tip GLP-1 sunt eliberate exclusiv pe bază de prescripție medicală. Poți întrerupe tratamentul oricând; îți recomandăm să discuți mai întâi cu medicul tău pentru a te asigura că întreruperea se face în siguranță.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Veya Tech Ltd. dba Veya Journey®</span>
+    <span>0316 114 118 | help@veyajourney.ro</span>
+  </div>
+</footer>
+
+<script>
+  // NOTE: accountName / accountNumber / avatar initials and the approval date
+  // should be populated dynamically from the logged-in patient's session data.
+  var cards = document.querySelectorAll('.plan-card');
+  var summaryLabel = document.getElementById('summaryLabel');
+  var activateBtn = document.getElementById('activateBtn');
+
+  function selectCard(card){
+    cards.forEach(function(c){
+      c.classList.remove('selected');
+      c.setAttribute('aria-pressed', 'false');
+    });
+    card.classList.add('selected');
+    card.setAttribute('aria-pressed', 'true');
+    var label = card.getAttribute('data-label');
+    var price = card.getAttribute('data-price');
+    summaryLabel.innerHTML = label + ' <span>· ' + price + ' lei/lună</span>';
+    activateBtn.setAttribute('data-plan', card.getAttribute('data-plan'));
+  }
+
+  cards.forEach(function(card){
+    card.addEventListener('click', function(){ selectCard(card); });
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        selectCard(card);
+      }
+    });
+  });
+
+  // NOTE: replace with the real Stripe Checkout URL / session-creation
+  // endpoint for this patient + plan combination.
+  var STRIPE_CHECKOUT_URL = 'https://checkout.stripe.com/';
+
+  var redirectLoader = document.getElementById('redirectLoader');
+
+  activateBtn.addEventListener('click', function(e){
+    e.preventDefault();
+
+    var selectedCard = document.querySelector('.plan-card.selected');
+    var payload = {
+      name: document.getElementById('accountName').textContent.trim(),
+      account_number: document.getElementById('accountNumber').textContent.replace('Cont · ', '').trim(),
+      plan: selectedCard.getAttribute('data-label')
+    };
+
+    activateBtn.setAttribute('aria-disabled', 'true');
+    redirectLoader.classList.add('visible');
+
+    fetch('https://formspree.io/f/xqerkvjz', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(err){
+      console.error('Formspree submission failed:', err);
+    }).finally(function(){
+      // Give the loader a moment to register visually before leaving the page.
+      setTimeout(function(){
+        window.location.href = STRIPE_CHECKOUT_URL;
+      }, 1200);
+    });
+  });
+</script>
+
+</body>
+</html>

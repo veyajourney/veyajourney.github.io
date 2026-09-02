@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluare de eligibilitate — Veya Journey</title>
+<meta name="description" content="Răspunde la câteva întrebări despre sănătatea ta pentru ca un medic licențiat să stabilească dacă tratamentul este potrivit pentru tine.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15221A; --ink-soft:#3B4A3F; --paper:#F1EFE6; --paper-raised:#FBFAF5;
+    --sage:#E4E7DB; --sage-line:#CDD2C1; --moss:#4F6B53; --moss-dark:#374A3B;
+    --moss-tint:#DDE5DC; --path:#A97A52; --path-tint:#EFE1D3;
+    --line: rgba(21,34,26,0.14); --danger:#9C4A3B; --danger-tint:#F3E3DF; --max:640px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Source Serif 4', Georgia, serif; -webkit-font-smoothing:antialiased; min-height:100vh;}
+  h1,h2,h3,label,button,.mono,.eyebrow{font-family:'Space Grotesk', sans-serif;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(241,239,230,0.94); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);}
+  .topbar{display:flex; align-items:center; gap:16px; height:64px;}
+  .logo{font-weight:700; font-size:17px; display:flex; align-items:center; gap:8px; text-decoration:none; color:var(--ink); flex-shrink:0;}
+  .progress-track{flex:1; height:4px; background:var(--sage); border-radius:2px; overflow:hidden;}
+  .progress-fill{height:100%; background:var(--moss); width:8%; transition:width .35s ease;}
+  .step-count{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); flex-shrink:0;}
+
+  main{padding:44px 0 100px;}
+  .step{display:none; animation:fadeUp .35s ease;}
+  .step.active{display:block;}
+  @keyframes fadeUp{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .eyebrow{font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-dark); display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .eyebrow::before{content:""; width:16px; height:1px; background:var(--path); display:inline-block;}
+  .step h2{font-size:26px; font-weight:600; margin-bottom:10px; line-height:1.25;}
+  .step-help{color:var(--ink-soft); font-size:15.5px; margin-bottom:26px;}
+
+  .options{display:flex; flex-direction:column; gap:10px; margin-bottom:26px;}
+  .opt{
+    display:flex; align-items:center; gap:12px; border:1px solid var(--sage-line); background:var(--paper-raised);
+    padding:15px 16px; border-radius:3px; cursor:pointer; font-size:15.5px; transition:border-color .15s ease, background .15s ease;
+  }
+  .opt:hover{border-color:var(--moss);}
+  .opt input{width:17px; height:17px; accent-color:var(--moss); flex-shrink:0;}
+  .opt.selected{border-color:var(--moss); background:var(--moss-tint);}
+
+  .field{margin-bottom:18px;}
+  label{display:block; font-size:13.5px; font-weight:500; margin-bottom:6px;}
+  input[type=text],input[type=number],input[type=tel],input[type=email],textarea{
+    width:100%; padding:13px 14px; border:1px solid var(--sage-line); border-radius:3px; background:var(--paper-raised);
+    font-family:'Source Serif 4',serif; font-size:15.5px; color:var(--ink);
+  }
+  #dob{ font-family:'IBM Plex Mono',monospace; font-size:14.5px; letter-spacing:0.03em; }
+  input:focus,textarea:focus{outline:none; border-color:var(--moss);}
+  textarea{resize:vertical; min-height:80px;}
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+
+  .nav-row{display:flex; justify-content:space-between; align-items:center; margin-top:32px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-weight:600; font-size:15px;
+    padding:14px 26px; border-radius:2px; border:1px solid transparent; cursor:pointer; background:var(--moss); color:var(--paper-raised);
+    transition:background .18s ease, transform .18s ease;
+  }
+  .btn:hover{background:var(--moss-dark); transform:translateY(-1px);}
+  .btn:disabled{opacity:0.45; cursor:not-allowed; transform:none;}
+  .btn-ghost{background:transparent; border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper); transform:none;}
+
+  .checklist{display:flex; flex-direction:column; gap:12px; margin-bottom:10px;}
+  .check-row{display:flex; gap:12px; align-items:flex-start; font-size:14.5px; color:var(--ink-soft);}
+  .check-row input{margin-top:4px; width:16px; height:16px; accent-color:var(--moss); flex-shrink:0;}
+
+  .stop-card{background:var(--danger-tint); border:1px solid rgba(156,74,59,0.3); border-radius:3px; padding:22px; margin-bottom:24px;}
+  .stop-card h3{color:var(--danger); font-size:17px; margin-bottom:8px;}
+  .stop-card p{color:var(--ink-soft); font-size:15px;}
+
+  .safety-note{margin-top:22px; display:flex; gap:10px; font-size:13px; color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--sage-line); border-left:3px solid var(--path); padding:12px 14px; border-radius:2px;}
+
+  .bmi-card{background:var(--paper-raised); border:1px solid var(--sage-line); border-radius:3px; padding:18px 20px; margin-top:6px; margin-bottom:22px;}
+  .bmi-value{font-size:32px; font-weight:600; font-family:'Space Grotesk',sans-serif;}
+  .bmi-label{font-size:13px; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;}
+
+  /* --- Confirmation page --- */
+  .confirm-icon{width:52px; height:52px; border-radius:50%; background:var(--moss-tint); display:flex; align-items:center; justify-content:center; color:var(--moss-dark); margin-bottom:24px;}
+  .confirm-hero h2{margin-bottom:12px;}
+  .confirm-hero .step-help{max-width:50ch; margin-bottom:0;}
+
+  .confirm-stats{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:32px 0;}
+  .stat-card{background:var(--paper-raised); border:1px solid var(--sage-line); border-radius:4px; padding:18px 20px;}
+  .stat-label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px;}
+  .stat-value{font-family:'Space Grotesk',sans-serif; font-size:21px; font-weight:600; line-height:1.25;}
+  .stat-card.account{background:var(--moss-tint); border-color:var(--sage-line);}
+  .stat-card.account .stat-value{font-family:'IBM Plex Mono',monospace; letter-spacing:0.06em; color:var(--moss-dark);}
+  .stat-card.elig{border-left:3px solid var(--sage-line);}
+  .stat-card.elig .stat-sub{font-size:13px; color:var(--ink-soft); margin-top:8px; line-height:1.5;}
+  .stat-card.elig.high{border-left-color:var(--moss);}
+  .stat-card.elig.high .stat-value{color:var(--moss-dark);}
+  .stat-card.elig.moderate{border-left-color:var(--path);}
+  .stat-card.elig.moderate .stat-value{color:var(--path);}
+  .stat-card.elig.low{border-left-color:var(--danger);}
+  .stat-card.elig.low .stat-value{color:var(--danger);}
+  .confirm-stats-note{font-size:12px; color:var(--ink-soft); font-style:italic; margin:-20px 0 32px;}
+
+  .next-steps{margin-bottom:36px;}
+  .next-steps .eyebrow{margin-bottom:20px;}
+  .timeline-item{position:relative; padding-left:44px; padding-bottom:24px;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{content:""; position:absolute; left:15px; top:32px; bottom:0; width:1px; background:var(--sage-line);}
+  .timeline-item:last-child::before{display:none;}
+  .timeline-marker{position:absolute; left:0; top:0; width:32px; height:32px; border-radius:50%; background:var(--paper-raised); border:1px solid var(--sage-line); display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:500; color:var(--moss-dark);}
+  .timeline-item.done .timeline-marker{background:var(--moss-tint); border-color:var(--moss); color:var(--moss-dark);}
+  .timeline-item.conditional .timeline-marker{border-color:var(--path); color:var(--path);}
+  .timeline-title{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15.5px; margin-bottom:5px; padding-top:5px;}
+  .timeline-desc{font-size:14px; color:var(--ink-soft); line-height:1.6;}
+
+  .legal-block{border-top:1px solid var(--line); padding-top:16px;}
+  .legal-block p{font-size:12px; line-height:1.65; color:var(--ink-soft);}
+
+  /* ---------- PAGE LOADER ---------- */
+  .loader{
+    position:fixed; inset:0; z-index:999;
+    background:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  .loader.hidden{opacity:0; visibility:hidden; pointer-events:none;}
+  .loader-mark{width:64px; height:64px;}
+  .loader-path{
+    stroke-dasharray:70;
+    stroke-dashoffset:0;
+    animation:loaderDraw 1.4s ease-in-out infinite;
+  }
+  .loader-dot{
+    animation:loaderDot 1.4s ease-in-out infinite;
+    transform-origin:21px 6px;
+  }
+  @keyframes loaderDraw{
+    0%{ stroke-dashoffset:70; }
+    55%{ stroke-dashoffset:0; }
+    100%{ stroke-dashoffset:-70; }
+  }
+  @keyframes loaderDot{
+    0%, 100%{ transform:scale(0.85); opacity:.6; }
+    50%{ transform:scale(1.15); opacity:1; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .loader-path, .loader-dot{ animation:none; }
+  }
+
+  @media (max-width:520px){
+    .grid-2, .confirm-stats{grid-template-columns:1fr;}
+    .confirm-stats-note{margin-top:-8px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="loader" id="pageLoader" aria-hidden="true">
+  <svg class="loader-mark" viewBox="0 0 24 24" fill="none">
+    <path class="loader-path" d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/>
+    <circle class="loader-dot" cx="21" cy="6" r="2" fill="#A97A52"/>
+  </svg>
+</div>
+
+<header>
+  <div class="wrap topbar">
+    <a href="index.html" class="logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/><circle cx="21" cy="6" r="2" fill="#A97A52"/></svg>
+    </a>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="step-count" id="stepCount">1 / 12</div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <form id="assessmentForm" onsubmit="return false;">
+
+      <!-- STEP 1: Intro -->
+      <div class="step active" data-step="1">
+        <p class="eyebrow">Evaluare de eligibilitate</p>
+        <h2>Câteva întrebări, ca să te cunoască medicul tău înainte de a decide</h2>
+        <p class="step-help">Durează în jur de 5 minute. Răspunsurile tale sunt citite direct de un medic licențiat — nu de un algoritm — înainte de orice decizie privind tratamentul. Evaluarea este gratuită, indiferent de rezultat.</p>
+        <div class="safety-note">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:2px;"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          <span>Această evaluare nu este o urgență medicală și nu înlocuiește un consult de urgență. Dacă ai o problemă medicală urgentă, sună la <strong>112</strong>.</span>
+        </div>
+        <div class="nav-row" style="justify-content:flex-end;">
+          <button type="button" class="btn" onclick="goTo(2)">Începe evaluarea →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Basic info -->
+      <div class="step" data-step="2">
+        <p class="eyebrow">1. Despre tine</p>
+        <h2>Câteva date de bază</h2>
+        <p class="step-help">Ne ajută să confirmăm identitatea ta și să respectăm cerințele legale privind vârsta minimă.</p>
+        <div class="grid-2">
+          <div class="field">
+            <label for="fullname">Nume complet *</label>
+            <input type="text" id="fullname" required>
+          </div>
+          <div class="field">
+            <label for="dob">Data nașterii *</label>
+            <input type="text" id="dob" required placeholder="ZZ/LL/AAAA" inputmode="numeric" maxlength="10" oninput="formatDobInput(event)">
+          </div>
+        </div>
+        <div class="field">
+          <label>Sex biologic (relevant clinic pentru dozare și contraindicații) *</label>
+          <div class="options" id="sexOptions">
+            <label class="opt"><input type="radio" name="sex" value="feminin"> Feminin</label>
+            <label class="opt"><input type="radio" name="sex" value="masculin"> Masculin</label>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(1)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handleBasicInfo()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2b: Hard stop for under-18 -->
+      <div class="step" data-step="2b">
+        <div class="stop-card">
+          <h3>Ne pare rău, nu putem continua această evaluare</h3>
+          <p>Acest serviciu este disponibil doar persoanelor cu vârsta de minimum 18 ani, conform cerințelor legale. Dacă ai introdus data nașterii din greșeală, te poți întoarce la pasul anterior.</p>
+        </div>
+        <p class="step-help">Dacă informația a fost introdusă din greșeală, te poți întoarce la pasul anterior.</p>
+        <div class="nav-row" style="justify-content:flex-start;">
+          <button type="button" class="btn btn-ghost" onclick="goTo(2)">← Înapoi la pasul anterior</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Pregnancy screen (shown conditionally, but kept simple here as direct question) -->
+      <div class="step" data-step="3">
+        <p class="eyebrow">2. Sarcină și alăptare</p>
+        <h2>Ești însărcinată, alăptezi sau încerci să rămâi însărcinată?</h2>
+        <p class="step-help">Tratamentele pentru pierderea în greutate din această clasă nu sunt potrivite în aceste situații.</p>
+        <div class="options" id="pregnancyOptions">
+          <label class="opt"><input type="radio" name="pregnancy" value="nu"> Nu, niciuna dintre acestea</label>
+          <label class="opt"><input type="radio" name="pregnancy" value="da"> Da, cel puțin una dintre acestea</label>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(2)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handlePregnancy()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3b: Hard stop for pregnancy -->
+      <div class="step" data-step="3b">
+        <div class="stop-card">
+          <h3>Pe baza acestui răspuns, tratamentul nu este potrivit acum</h3>
+          <p>Tratamentele din această clasă nu sunt recomandate în sarcină sau alăptare. Îți recomandăm să discuți cu medicul tău obstetrician sau medicul de familie despre gestionarea greutății în această perioadă. Poți reveni cu o nouă evaluare oricând situația se schimbă.</p>
+        </div>
+        <p class="step-help">Dacă informația a fost introdusă din greșeală, te poți întoarce la pasul anterior.</p>
+        <div class="nav-row" style="justify-content:flex-start;">
+          <button type="button" class="btn btn-ghost" onclick="goTo(3)">← Înapoi la întrebarea anterioară</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Height & weight -->
+      <div class="step" data-step="4">
+        <p class="eyebrow">3. Înălțime și greutate</p>
+        <h2>Care este înălțimea și greutatea ta actuală?</h2>
+        <p class="step-help">Folosim aceste date pentru a calcula indicele de masă corporală (IMC) — unul dintre criteriile pe care medicul le va lua în considerare, alături de restul evaluării.</p>
+        <div class="grid-2">
+          <div class="field">
+            <label for="height">Înălțime (cm) *</label>
+            <input type="number" id="height" min="120" max="230" required oninput="calcBMI()">
+          </div>
+          <div class="field">
+            <label for="weight">Greutate (kg) *</label>
+            <input type="number" id="weight" min="35" max="300" required oninput="calcBMI()">
+          </div>
+        </div>
+        <div class="bmi-card" id="bmiCard" style="display:none;">
+          <div class="bmi-label">IMC ESTIMAT</div>
+          <div class="bmi-value" id="bmiValue">—</div>
+          <div class="bmi-label" id="bmiCategory"></div>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(3)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handleHeightWeight()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Chronic conditions -->
+      <div class="step" data-step="5">
+        <p class="eyebrow">4. Istoric medical</p>
+        <h2>Ai vreuna dintre următoarele afecțiuni? *</h2>
+        <p class="step-help">Selectează tot ce se aplică (sau „Niciuna dintre acestea”). Aceste informații sunt esențiale pentru siguranța ta.</p>
+        <div class="checklist">
+          <label class="check-row"><input type="checkbox" name="conditions" value="diabet1"> Diabet zaharat de tip 1</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="diabet2"> Diabet zaharat de tip 2</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="tiroida"> Afecțiune tiroidiană (inclusiv istoric personal sau familial de carcinom medular tiroidian sau neoplazie endocrină multiplă tip 2)</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="pancreatita"> Pancreatită (în prezent sau în antecedente)</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="renal"> Boală renală</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="hepatic"> Boală hepatică</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="cardiovascular"> Boală cardiovasculară (infarct, insuficiență cardiacă, aritmii)</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="alimentatie"> Tulburare de comportament alimentar, actuală sau în antecedente</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="digestiv"> Afecțiune gastro-intestinală severă (de exemplu, gastropareză)</label>
+          <label class="check-row"><input type="checkbox" name="conditions" value="niciuna"> Niciuna dintre acestea</label>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(4)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handleConditions()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 6: Medications & allergies -->
+      <div class="step" data-step="6">
+        <p class="eyebrow">5. Medicație și alergii</p>
+        <h2>Ce medicamente iei în prezent și ai alergii cunoscute?</h2>
+        <p class="step-help">Include suplimente și medicamente fără prescripție. Dacă nu iei nimic, scrie „niciunul”.</p>
+        <div class="field">
+          <label for="meds">Medicație curentă (opțional)</label>
+          <textarea id="meds" placeholder="Ex: metformină 500mg, levotiroxină... (sau lasă necompletat dacă nu iei nimic)"></textarea>
+        </div>
+        <div class="field">
+          <label for="allergies">Alergii cunoscute (medicamente sau substanțe) *</label>
+          <textarea id="allergies" placeholder="Ex: penicilină, sau „niciuna cunoscută”" required></textarea>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(5)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handleMedsAllergies()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 7: Prior weight-loss treatment history -->
+      <div class="step" data-step="7">
+        <p class="eyebrow">6. Istoricul tău cu gestionarea greutății</p>
+        <h2>Ai mai urmat un tratament pentru pierderea în greutate? *</h2>
+        <div class="options" id="priorTreatmentOptions">
+          <label class="opt"><input type="radio" name="priorTreatment" value="niciodata"> Nu, este prima dată</label>
+          <label class="opt"><input type="radio" name="priorTreatment" value="alt-glp1"> Da, un alt medicament din clasa GLP-1 (semaglutidă, liraglutidă, tirzepatidă etc.)</label>
+          <label class="opt"><input type="radio" name="priorTreatment" value="chirurgie"> Da, o intervenție chirurgicală bariatrică</label>
+          <label class="opt"><input type="radio" name="priorTreatment" value="altele"> Da, alte metode (dietă supravegheată, alt medicament)</label>
+        </div>
+        <div class="field" id="priorTreatmentDetailWrap" style="display:none;">
+          <label for="priorTreatmentDetail">Spune-ne pe scurt ce ai încercat și cum a decurs (opțional)</label>
+          <textarea id="priorTreatmentDetail"></textarea>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(6)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handlePriorTreatment()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 8: Goals -->
+      <div class="step" data-step="8">
+        <p class="eyebrow">7. Obiectivul tău</p>
+        <h2>Ce te-a determinat să cauți acest tratament acum? (opțional)</h2>
+        <p class="step-help">Nu există răspuns greșit — ne ajută pe noi și pe medicul tău să înțelegem contextul.</p>
+        <div class="field">
+          <textarea id="goals" placeholder="De exemplu: îmbunătățirea unor valori de sănătate, energie, confort în activitățile zilnice..."></textarea>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(7)">← Înapoi</button>
+          <button type="button" class="btn" onclick="goTo(9)">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 9: Family doctor -->
+      <div class="step" data-step="9">
+        <p class="eyebrow">8. Continuitatea îngrijirii</p>
+        <h2>Vrei să informăm medicul tău de familie despre tratament? (opțional)</h2>
+        <p class="step-help">Nu este obligatoriu, dar este o bună practică pentru continuitatea îngrijirii tale.</p>
+        <div class="options" id="gpOptions">
+          <label class="opt"><input type="radio" name="gpConsent" value="da"> Da, poți contacta medicul meu de familie</label>
+          <label class="opt"><input type="radio" name="gpConsent" value="nu"> Nu, prefer să nu implic medicul de familie</label>
+        </div>
+        <div class="field" id="gpDetailWrap" style="display:none;">
+          <label for="gpDetail">Numele și datele de contact ale medicului de familie</label>
+          <input type="text" id="gpDetail" placeholder="Nume, telefon sau e-mail cabinet">
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(8)">← Înapoi</button>
+          <button type="button" class="btn" onclick="goTo(10)">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 10: Contact details -->
+      <div class="step" data-step="10">
+        <p class="eyebrow">9. Datele tale de contact</p>
+        <h2>Unde te poate contacta echipa noastră medicală?</h2>
+        <div class="field">
+          <label for="phone">Telefon *</label>
+          <input type="tel" id="phone" required>
+        </div>
+        <div class="field">
+          <label for="email2">E-mail *</label>
+          <input type="email" id="email2" required>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(9)">← Înapoi</button>
+          <button type="button" class="btn" onclick="handleContact()">Continuă →</button>
+        </div>
+      </div>
+
+      <!-- STEP 11: Consent -->
+      <div class="step" data-step="11">
+        <p class="eyebrow">10. Ultimul pas</p>
+        <h2>Confirmă și trimite</h2>
+        <p class="step-help">Un medic licențiat va analiza răspunsurile tale înainte de a lua orice decizie privind tratamentul.</p>
+        <div class="checklist">
+          <label class="check-row"><input type="checkbox" id="consentAccuracy" required> Confirm că informațiile furnizate sunt corecte și complete, în măsura cunoștințelor mele.</label>
+          <label class="check-row"><input type="checkbox" id="consentHealthData" required> Sunt de acord ca datele mele privind sănătatea să fie prelucrate de Veya Journey în scopul evaluării clinice, conform <a href="politica-de-confidentialitate.html" target="_blank">Politicii de Confidențialitate</a>.</label>
+          <label class="check-row"><input type="checkbox" id="consentTerms" required> Am citit și accept <a href="termeni-si-conditii.html" target="_blank">Termenii și Condițiile</a>.</label>
+        </div>
+        <div class="nav-row">
+          <button type="button" class="btn btn-ghost" onclick="goTo(10)">← Înapoi</button>
+          <button type="button" class="btn" id="submitBtn" onclick="submitAssessment()">Trimite spre evaluare medicală →</button>
+        </div>
+      </div>
+
+      <!-- STEP 12: Confirmation -->
+      <div class="step" data-step="12">
+
+        <div class="confirm-hero">
+          <div class="confirm-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <h2>Evaluarea ta a fost trimisă</h2>
+          <p class="step-help">Datele tale au fost transmise în siguranță unui medic licențiat, pentru evaluare clinică.</p>
+        </div>
+
+        <div class="confirm-stats">
+          <div class="stat-card account">
+            <div class="stat-label">Număr de cont</div>
+            <div class="stat-value" id="accountNumber">—</div>
+          </div>
+          <div class="stat-card elig" id="eligibilityCard">
+            <div class="stat-label">Estimare preliminară</div>
+            <div class="stat-value" id="eligibilityLevel">—</div>
+            <div class="stat-sub" id="eligibilityText"></div>
+          </div>
+        </div>
+        <p class="confirm-stats-note">Estimarea de mai sus este orientativă și nu reprezintă o decizie medicală.</p>
+
+        <div class="next-steps">
+          <p class="eyebrow">Ce urmează</p>
+
+          <div class="timeline-item done">
+            <div class="timeline-marker">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <div class="timeline-title">Evaluare primită</div>
+            <div class="timeline-desc">Răspunsurile tale au ajuns la un medic licențiat, care va face evaluarea clinică.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">2</div>
+            <div class="timeline-title">Rezultatul evaluării</div>
+            <div class="timeline-desc">Dacă ești pre-aprobat(ă), vei primi un e-mail cu instrucțiuni pentru accesarea contului tău Veya Journey.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">3</div>
+            <div class="timeline-title">Verificare și documente</div>
+            <div class="timeline-desc">După conectare, ți se va cere să îți verifici identitatea și să încarci fotografiile și informațiile necesare pentru finalizarea evaluării medicale.</div>
+          </div>
+
+          <div class="timeline-item conditional">
+            <div class="timeline-marker">4</div>
+            <div class="timeline-title">Decizia medicului</div>
+            <div class="timeline-desc">O rețetă va fi emisă doar dacă medicul stabilește că tratamentul este adecvat clinic pentru tine.</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">5</div>
+            <div class="timeline-title">Plată și începerea tratamentului</div>
+            <div class="timeline-desc">Dacă ești aprobat(ă), vei fi invitat(ă) să efectuezi plata. Abonamentul și planul tău de tratament, dacă este prescris, vor deveni active.</div>
+          </div>
+        </div>
+
+        <div class="legal-block">
+          <p>Trimiterea acestei evaluări nu garantează eligibilitatea, o rețetă sau un tratament. Toate deciziile de prescriere aparțin exclusiv unui medic licențiat, în urma unei evaluări clinice individuale.</p>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</main>
+
+<script>
+  var pageLoader = document.getElementById('pageLoader');
+  var loaderShownAt = Date.now();
+  var MIN_LOADER_MS = 1600; // show it longer than a typical flash
+
+  function hideLoader(){
+    if(!pageLoader) return;
+    var elapsed = Date.now() - loaderShownAt;
+    var wait = Math.max(0, MIN_LOADER_MS - elapsed);
+    setTimeout(function(){
+      pageLoader.classList.add('hidden');
+    }, wait);
+  }
+  function showLoader(){
+    if(!pageLoader) return;
+    loaderShownAt = Date.now();
+    pageLoader.classList.remove('hidden');
+  }
+
+  window.addEventListener('load', hideLoader);
+  // Fallback in case the load event is delayed or already fired
+  setTimeout(hideLoader, 5000);
+  const totalSteps = 11; // steps used for progress bar (excludes confirmation screen)
+  let currentStep = 1;
+
+  function goTo(step){
+    document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+    document.querySelector('.step[data-step="'+step+'"]').classList.add('active');
+    currentStep = step;
+    updateProgress(step);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  function updateProgress(step){
+    const numericStep = (typeof step === 'string') ? parseFloat(step) : step;
+    const pct = Math.min(100, Math.round((numericStep/totalSteps)*100));
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('stepCount').textContent = Math.min(Math.ceil(numericStep), totalSteps) + ' / ' + totalSteps;
+  }
+
+  // Highlight selected option cards
+  document.querySelectorAll('.opt input[type=radio]').forEach(input => {
+    input.addEventListener('change', () => {
+      const name = input.name;
+      document.querySelectorAll('input[name="'+name+'"]').forEach(i => {
+        i.closest('.opt').classList.toggle('selected', i.checked);
+      });
+    });
+  });
+
+  // Minimum eligible age
+  const MIN_AGE = 18;
+
+  // Auto-insert slashes as the user types: ZZ/LL/AAAA
+  function formatDobInput(e){
+    let digits = e.target.value.replace(/\D/g,'').slice(0,8); // ddmmyyyy
+    let out = digits.slice(0,2);
+    if(digits.length >= 3) out += '/' + digits.slice(2,4);
+    if(digits.length >= 5) out += '/' + digits.slice(4,8);
+    e.target.value = out;
+  }
+
+  // Parses a strict DD/MM/YYYY string into a Date, or null if invalid/nonexistent
+  function parseDob(str){
+    const match = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(str);
+    if(!match) return null;
+    const day = parseInt(match[1], 10);
+    const month = parseInt(match[2], 10);
+    const year = parseInt(match[3], 10);
+    if(month < 1 || month > 12 || day < 1 || day > 31 || year < 1900) return null;
+    const date = new Date(year, month - 1, day);
+    if(date.getFullYear() !== year || date.getMonth() !== month - 1 || date.getDate() !== day) return null;
+    if(date > new Date()) return null; // no future birth dates
+    return date;
+  }
+
+  function calcAge(dobStr){
+    const dob = parseDob(dobStr);
+    if(!dob) return null;
+    const today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    const m = today.getMonth() - dob.getMonth();
+    if(m < 0 || (m === 0 && today.getDate() < dob.getDate())) age--;
+    return age;
+  }
+
+  function handleBasicInfo(){
+    const fullname = document.getElementById('fullname').value.trim();
+    const dob = document.getElementById('dob').value;
+    const sex = document.querySelector('input[name="sex"]:checked');
+    if(!fullname || !dob || !sex){
+      alert('Te rugăm să completezi numele complet, data nașterii și sexul biologic.');
+      return;
+    }
+    const age = calcAge(dob);
+    if(age === null){
+      alert('Te rugăm să introduci o dată a nașterii validă, în formatul ZZ/LL/AAAA.');
+      return;
+    }
+    if(age < MIN_AGE){
+      goTo('2b');
+      return;
+    }
+    goTo(3);
+  }
+
+  function handlePregnancy(){
+    const val = document.querySelector('input[name="pregnancy"]:checked');
+    if(!val){
+      alert('Te rugăm să selectezi un răspuns.');
+      return;
+    }
+    if(val.value === 'da'){
+      goTo('3b');
+    } else {
+      goTo(4);
+    }
+  }
+
+  function handleHeightWeight(){
+    const h = document.getElementById('height').value;
+    const w = document.getElementById('weight').value;
+    if(!h || !w){
+      alert('Te rugăm să completezi înălțimea și greutatea.');
+      return;
+    }
+    goTo(5);
+  }
+
+  function handleConditions(){
+    const checked = document.querySelectorAll('input[name="conditions"]:checked');
+    if(checked.length === 0){
+      alert('Te rugăm să selectezi cel puțin o opțiune (sau „Niciuna dintre acestea”).');
+      return;
+    }
+    goTo(6);
+  }
+
+  function handleMedsAllergies(){
+    const allergies = document.getElementById('allergies').value.trim();
+    if(!allergies){
+      alert('Te rugăm să completezi secțiunea despre alergii (scrie „niciuna cunoscută” dacă nu ai alergii).');
+      return;
+    }
+    goTo(7);
+  }
+
+  function handlePriorTreatment(){
+    const val = document.querySelector('input[name="priorTreatment"]:checked');
+    if(!val){
+      alert('Te rugăm să selectezi o opțiune.');
+      return;
+    }
+    goTo(8);
+  }
+
+  function handleContact(){
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email2').value.trim();
+    if(!phone || !email){
+      alert('Te rugăm să completezi telefonul și adresa de e-mail.');
+      return;
+    }
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailPattern.test(email)){
+      alert('Te rugăm să introduci o adresă de e-mail validă.');
+      return;
+    }
+    goTo(11);
+  }
+
+  function calcBMI(){
+    const h = parseFloat(document.getElementById('height').value);
+    const w = parseFloat(document.getElementById('weight').value);
+    const card = document.getElementById('bmiCard');
+    if(h > 0 && w > 0){
+      const bmi = w / Math.pow(h/100, 2);
+      card.style.display = 'block';
+      document.getElementById('bmiValue').textContent = bmi.toFixed(1);
+      let cat = '';
+      if(bmi < 18.5) cat = 'Subponderal';
+      else if(bmi < 25) cat = 'Greutate normală';
+      else if(bmi < 30) cat = 'Suprapondere';
+      else if(bmi < 35) cat = 'Obezitate clasa I';
+      else if(bmi < 40) cat = 'Obezitate clasa II';
+      else cat = 'Obezitate clasa III';
+      document.getElementById('bmiCategory').textContent = cat + ' · va fi confirmat de medic pe baza evaluării complete';
+    } else {
+      card.style.display = 'none';
+    }
+  }
+
+  // Show/hide detail fields
+  document.querySelectorAll('input[name="priorTreatment"]').forEach(input => {
+    input.addEventListener('change', () => {
+      const show = input.value !== 'niciodata' && input.checked;
+      document.getElementById('priorTreatmentDetailWrap').style.display = show ? 'block' : 'none';
+    });
+  });
+  document.querySelectorAll('input[name="gpConsent"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.getElementById('gpDetailWrap').style.display = (input.value === 'da' && input.checked) ? 'block' : 'none';
+    });
+  });
+
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mojgakpj';
+
+  // Rough, non-diagnostic pre-screen only — mirrors commonly used general
+  // criteria (BMI ≥30, or BMI ≥27 with a weight-related comorbidity) and
+  // flags conditions that often warrant closer physician review. This never
+  // determines eligibility; it only sets expectations before physician review.
+  function estimateEligibility(bmiStr, rawConditions){
+    const bmi = parseFloat(bmiStr);
+    const reviewFlags = ['pancreatita', 'tiroida', 'digestiv', 'alimentatie'];
+    const comorbidities = ['diabet1', 'diabet2', 'cardiovascular', 'renal', 'hepatic'];
+    const needsCloseReview = rawConditions.some(c => reviewFlags.includes(c));
+    const hasComorbidity = rawConditions.some(c => comorbidities.includes(c));
+
+    if(needsCloseReview){
+      return {
+        level: 'low',
+        label: 'Necesită evaluare atentă',
+        text: 'Pe baza afecțiunilor raportate, considerăm că tratamentul cu medicație GLP-1 este posibil să nu fie potrivit pentru tine. Un medic licențiat va analiza în continuare dosarul tău complet și va lua decizia finală.'
+      };
+    }
+    if(isNaN(bmi)){
+      return {
+        level: 'moderate',
+        label: 'Nedeterminat',
+        text: 'Nu am putut estima șansele fără un IMC calculat. Medicul va analiza dosarul tău complet.'
+      };
+    }
+    if(bmi >= 30 || (bmi >= 27 && hasComorbidity)){
+      return {
+        level: 'high',
+        label: 'Șanse ridicate',
+        text: 'Pe baza IMC-ului și a informațiilor furnizate, profilul tău se încadrează, în general, în criteriile uzuale pentru acest tip de tratament.'
+      };
+    }
+    if(bmi >= 25){
+      return {
+        level: 'moderate',
+        label: 'Șanse moderate',
+        text: 'Profilul tău se apropie de criteriile uzuale. Decizia finală depinde de evaluarea completă a medicului.'
+      };
+    }
+    return {
+      level: 'low',
+      label: 'Șanse scăzute',
+      text: 'Pe baza IMC-ului raportat, considerăm că medicația GLP-1 este posibil să nu fie potrivită pentru tine. Un medic licențiat va analiza în continuare dosarul tău complet și va lua decizia finală.'
+    };
+  }
+
+  // Generates a cryptographically random, numeric-only 8-digit account number
+  function generateAccountNumber(){
+    const arr = new Uint32Array(1);
+    crypto.getRandomValues(arr);
+    const num = arr[0] % 100000000; // 0 - 99999999
+    return String(num).padStart(8, '0');
+  }
+
+  function submitAssessment(){
+    const accuracy = document.getElementById('consentAccuracy').checked;
+    const healthData = document.getElementById('consentHealthData').checked;
+    const terms = document.getElementById('consentTerms').checked;
+    if(!accuracy || !healthData || !terms){
+      alert('Te rugăm să confirmi toate cele trei declarații înainte de a trimite evaluarea.');
+      return;
+    }
+
+    // Build the structured summary a physician would review
+    const conditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(i => i.parentElement.textContent.trim());
+    const rawConditions = Array.from(document.querySelectorAll('input[name="conditions"]:checked')).map(i => i.value);
+    const sex = document.querySelector('input[name="sex"]:checked');
+    const pregnancy = document.querySelector('input[name="pregnancy"]:checked');
+    const priorTreatment = document.querySelector('input[name="priorTreatment"]:checked');
+    const gpConsent = document.querySelector('input[name="gpConsent"]:checked');
+
+    // Internal snapshot of every field collected across the assessment
+    const accountNumber = generateAccountNumber();
+    const bmiText = document.getElementById('bmiValue') ? document.getElementById('bmiValue').textContent : '';
+    const eligibility = estimateEligibility(bmiText, rawConditions);
+    const fields = {
+      account_number: accountNumber,
+      fullname: document.getElementById('fullname').value || '',
+      dob: document.getElementById('dob').value || '',
+      sex: sex ? sex.value : '',
+      pregnancy: pregnancy ? pregnancy.value : '',
+      height_cm: document.getElementById('height').value || '',
+      weight_kg: document.getElementById('weight').value || '',
+      bmi: document.getElementById('bmiValue') ? document.getElementById('bmiValue').textContent : '',
+      bmi_category: document.getElementById('bmiCategory') ? document.getElementById('bmiCategory').textContent : '',
+      conditions: conditions.length ? conditions.join(', ') : 'Niciuna raportată',
+      medications: document.getElementById('meds').value || 'Niciuna raportată',
+      allergies: document.getElementById('allergies').value || '',
+      prior_treatment: priorTreatment ? priorTreatment.parentElement.textContent.trim() : '',
+      prior_treatment_detail: document.getElementById('priorTreatmentDetail') ? document.getElementById('priorTreatmentDetail').value : '',
+      goals: document.getElementById('goals').value || 'Nespecificat',
+      gp_consent: gpConsent ? gpConsent.value : '',
+      gp_detail: document.getElementById('gpDetail') ? document.getElementById('gpDetail').value : '',
+      phone: document.getElementById('phone').value || '',
+      email: document.getElementById('email2').value || '',
+      consent_accuracy: accuracy,
+      consent_health_data: healthData,
+      consent_terms: terms,
+      submitted_at: new Date().toISOString()
+    };
+
+    // What Formspree actually receives — human-readable labels as keys, so
+    // the submissions list/emails show meaningful field titles instead of
+    // raw variable names.
+    const payload = {
+      _subject: 'Evaluare Veya Journey — #' + accountNumber + ' — ' + (fields.fullname || 'Nume necompletat'),
+      'Număr de cont': fields.account_number,
+      'Nume complet': fields.fullname,
+      'Data nașterii': fields.dob,
+      'Sex biologic': fields.sex,
+      'Sarcină / alăptare': fields.pregnancy,
+      'Înălțime (cm)': fields.height_cm,
+      'Greutate (kg)': fields.weight_kg,
+      'IMC estimat': fields.bmi,
+      'Categorie IMC': fields.bmi_category,
+      'Afecțiuni raportate': fields.conditions,
+      'Medicație curentă': fields.medications,
+      'Alergii cunoscute': fields.allergies || 'Niciuna raportată',
+      'Tratament anterior': fields.prior_treatment,
+      'Detalii tratament anterior': fields.prior_treatment_detail || '—',
+      'Motivul solicitării': fields.goals,
+      'Acord contactare medic de familie': fields.gp_consent,
+      'Date medic de familie': fields.gp_detail || '—',
+      'Telefon': fields.phone,
+      'E-mail': fields.email,
+      'Estimare preliminară eligibilitate': eligibility.label,
+      'A confirmat acuratețea datelor': fields.consent_accuracy,
+      'A consimțit prelucrarea datelor de sănătate': fields.consent_health_data,
+      'A acceptat termenii și condițiile': fields.consent_terms,
+      'Data trimiterii': fields.submitted_at
+    };
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Se trimite...';
+    showLoader();
+
+    fetch(FORMSPREE_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(res => {
+      if(!res.ok) throw new Error('Formspree a răspuns cu status ' + res.status);
+      return res.json().catch(() => ({}));
+    })
+    .then(() => {
+      document.getElementById('accountNumber').textContent = fields.account_number;
+
+      const eligCard = document.getElementById('eligibilityCard');
+      eligCard.classList.remove('high', 'moderate', 'low');
+      eligCard.classList.add(eligibility.level);
+      document.getElementById('eligibilityLevel').textContent = eligibility.label;
+      document.getElementById('eligibilityText').textContent = eligibility.text;
+
+      goTo(12);
+      hideLoader();
+    })
+    .catch(err => {
+      console.error(err);
+      alert('A apărut o eroare la trimiterea evaluării. Te rugăm să încerci din nou.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Trimite spre evaluare medicală →';
+      hideLoader();
+    });
+  }
+
+  updateProgress(1);
+</script>
+</body>
+</html>

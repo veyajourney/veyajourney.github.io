@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contul meu — Veya Journey</title>
+<meta name="description" content="Autentifică-te în contul tău Veya Journey pentru a-ți accesa planul de tratament, mesajele cu echipa medicală și comenzile.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15221A; --ink-soft:#3B4A3F; --paper:#F1EFE6; --paper-raised:#FBFAF5;
+    --sage:#E4E7DB; --sage-line:#CDD2C1; --moss:#4F6B53; --moss-dark:#374A3B;
+    --moss-tint:#DDE5DC; --path:#A97A52; --path-tint:#EFE1D3;
+    --line: rgba(21,34,26,0.14); --danger:#9C4A3B; --danger-tint:#F3E3DF;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--paper); color:var(--ink); font-family:'Source Serif 4', Georgia, serif; -webkit-font-smoothing:antialiased; min-height:100vh;}
+  a{color:var(--moss-dark);}
+  h1,h2,h3,.display,label,button,input{font-family:'Space Grotesk', sans-serif;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--moss-dark); display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:16px; height:1px; background:var(--path); display:inline-block;}
+
+  .shell{min-height:100vh; display:grid; grid-template-columns:1fr 1fr;}
+  @media (max-width:940px){ .shell{grid-template-columns:1fr;} .side{display:none;} }
+
+  .side{
+    background:var(--ink); color:var(--paper); padding:56px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden;
+  }
+  .side::after{
+    content:""; position:absolute; right:-120px; bottom:-120px; width:360px; height:360px; border-radius:50%;
+    background:radial-gradient(circle, rgba(79,107,83,0.45), transparent 70%);
+  }
+  .side-logo{display:flex; align-items:center; gap:9px; font-weight:700; font-size:19px; position:relative; z-index:1;}
+  .side-quote{font-family:'Source Serif 4', serif; font-size:26px; line-height:1.4; max-width:22ch; color:var(--paper); position:relative; z-index:1;}
+  .side-meta{font-family:'IBM Plex Mono', monospace; font-size:12px; color:#B9C0B4; position:relative; z-index:1;}
+
+  .form-col{display:flex; align-items:center; justify-content:center; padding:48px 28px;}
+  .form-card{width:100%; max-width:400px;}
+  .form-card h1{font-size:27px; font-weight:600; margin-top:14px; margin-bottom:6px;}
+  .form-sub{color:var(--ink-soft); font-size:15px; margin-bottom:28px;}
+
+  .field{margin-bottom:18px;}
+  label{display:block; font-size:13px; font-weight:500; color:var(--ink); margin-bottom:6px;}
+  input[type=email], input[type=password], input[type=text]{
+    width:100%; padding:13px 14px; border:1px solid var(--sage-line); border-radius:2px; background:var(--paper-raised);
+    font-family:'Source Serif 4', serif; font-size:15.5px; color:var(--ink); transition:border-color .15s ease;
+  }
+  input:focus{outline:none; border-color:var(--moss);}
+  .field-note{font-size:12.5px; color:var(--ink-soft); margin-top:5px;}
+
+  .row-between{display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; font-size:13.5px;}
+  .checkbox-row{display:flex; align-items:center; gap:8px;}
+  .checkbox-row input{width:auto;}
+  .link-quiet{color:var(--ink-soft); text-decoration:none; font-size:13.5px;}
+  .link-quiet:hover{color:var(--ink); text-decoration:underline;}
+
+  .btn{
+    width:100%; display:inline-flex; align-items:center; justify-content:center; gap:8px; font-weight:600; font-size:15px;
+    padding:14px 26px; border-radius:2px; border:1px solid transparent; cursor:pointer; text-decoration:none; background:var(--moss); color:var(--paper-raised);
+    transition:background .18s ease, transform .18s ease;
+  }
+  .btn:hover{background:var(--moss-dark); transform:translateY(-1px);}
+
+  .divider{display:flex; align-items:center; gap:12px; margin:26px 0; color:var(--ink-soft); font-size:12px; font-family:'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:0.06em;}
+  .divider::before,.divider::after{content:""; flex:1; height:1px; background:var(--line);}
+
+  .signup-note{text-align:center; font-size:14.5px; color:var(--ink-soft); margin-top:6px;}
+  .signup-note a{font-weight:600; text-decoration:none;}
+
+  .alert{
+    display:flex; gap:10px; background:var(--danger-tint); border:1px solid rgba(156,74,59,0.3); color:var(--danger);
+    padding:12px 14px; border-radius:2px; font-size:14px; margin-bottom:20px; align-items:flex-start;
+  }
+
+  .legal-strip{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:12px; color:var(--ink-soft); line-height:1.7;}
+  .legal-strip a{color:var(--ink-soft); text-decoration:underline;}
+
+  .safety-note{margin-top:22px; display:flex; gap:10px; font-size:12.5px; color:var(--ink-soft); background:var(--paper-raised); border:1px solid var(--sage-line); border-left:3px solid var(--path); padding:12px 14px; border-radius:2px;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="side">
+    <div class="side-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#8FAE93" stroke-width="2" stroke-linecap="round"/><circle cx="21" cy="6" r="2" fill="#A97A52"/></svg>
+      Veya Journey®
+    </div>
+    <p class="side-quote">"Evaluările periodice au făcut diferența. Am avut parte de monitorizare și îndrumare pe tot parcursul tratamentului, nu doar de livrarea medicamentului."</p>
+    <p class="side-meta">PACIENT VERIFICAT · CLUJ-NAPOCA</p>
+  </div>
+
+  <div class="form-col">
+    <div class="form-card">
+      <p class="eyebrow">Contul meu</p>
+      <h1>Bine ai revenit</h1>
+      <p class="form-sub">Autentifică-te pentru a-ți accesa planul de tratament, mesajele cu echipa medicală și comenzile.</p>
+
+      <!-- Exemplu de mesaj de eroare — se afișează doar la o autentificare eșuată -->
+      <!--
+      <div class="alert">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <span>E-mailul sau parola nu sunt corecte. Încearcă din nou sau folosește „Ai uitat parola?”.</span>
+      </div>
+      -->
+
+      <form>
+        <div class="field">
+          <label for="email">Număr de Cont sau E-mail</label>
+          <input type="email" id="email" name="email" placeholder="ex. 12345678 sau exemplu@exemplu.com" autocomplete="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Parolă</label>
+          <input type="password" id="password" name="password" placeholder="Parola ta" autocomplete="current-password" required>
+        </div>
+
+        <div class="row-between">
+          <span class="checkbox-row">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember" style="margin:0; font-weight:400;">Ține-mă minte</label>
+          </span>
+          <a href="contact.html" class="link-quiet">Ai uitat parola?</a>
+        </div>
+
+        <button type="submit" class="btn">Autentificare</button>
+      </form>
+
+      <div class="divider">sau</div>
+
+      <p class="signup-note">Nu ai încă un cont? <a href="evaluare-eligibilitate.html">Începe evaluarea de eligibilitate</a></p>
+
+      <div class="safety-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+        <span>Într-o urgență medicală, nu folosi contul tău Veya Journey® — sună la <strong>112</strong> sau mergi la cea mai apropiată unitate medicală.</span>
+      </div>
+
+      <div class="legal-strip">
+        Accesarea contului este permisă exclusiv titularului acestuia. Datele tale medicale sunt criptate și accesate doar de personal medical autorizat.
+        Prin autentificare confirmi că ești de acord cu <a href="termeni-si-conditii.html">Termenii și Condițiile</a> și cu <a href="politica-de-confidentialitate.html">Politica de Confidențialitate</a> Veya Journey®.
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

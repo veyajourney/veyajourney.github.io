@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Veya Journey®</title>
+<meta name="description" content="Contactează echipa Veya Journey pentru întrebări despre program, tratament sau contul tău.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15221A;
+    --ink-soft:#3B4A3F;
+    --paper:#F1EFE6;
+    --paper-raised:#FBFAF5;
+    --sage:#E4E7DB;
+    --sage-line:#CDD2C1;
+    --moss:#4F6B53;
+    --moss-dark:#374A3B;
+    --moss-tint:#DDE5DC;
+    --path:#A97A52;
+    --path-tint:#EFE1D3;
+    --line: rgba(21,34,26,0.14);
+    --shadow: 0 1px 2px rgba(21,34,26,0.06);
+    --max: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  h1,h2,h3,h4,.display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--moss-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px; height:1px; background:var(--path);
+    display:inline-block;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:2px;
+    border:1px solid transparent;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--paper-raised);}
+  .btn-primary:hover{background:var(--moss-dark);}
+  .btn-ghost{background:transparent; border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .btn-arrow{transition:transform .18s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+  .btn[disabled]{opacity:.6; cursor:not-allowed; transform:none;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,239,230,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    display:flex; align-items:center; gap:9px;
+    text-decoration:none;
+    white-space:nowrap; flex-shrink:0;
+  }
+  .logo-mark{width:22px; height:22px;}
+  .nav-links{display:flex; align-items:center; gap:22px; list-style:none; flex-wrap:nowrap;}
+  .nav-links a{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    text-decoration:none;
+    color:var(--ink-soft);
+    transition:color .15s ease;
+    white-space:nowrap;
+  }
+  .nav-links a:hover, .nav-links a.active{color:var(--ink);}
+  .nav-cta{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+  .nav-cta .btn{white-space:nowrap;}
+  .nav-mobile-toggle{
+    display:none;
+    background:none; border:1px solid var(--line); border-radius:2px;
+    width:40px; height:40px; align-items:center; justify-content:center;
+    cursor:pointer; flex-shrink:0; color:var(--ink);
+  }
+  @media (max-width:1080px){ .nav-links{gap:16px;} }
+  @media (max-width:940px){
+    .nav-links{
+      display:none;
+      position:absolute; top:76px; left:0; right:0;
+      background:var(--paper-raised);
+      border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:flex-start; gap:0;
+      padding:8px 0;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links li{width:100%;}
+    .nav-links a{display:block; padding:14px 32px; width:100%;}
+    .nav-cta .btn-ghost{display:none;}
+    .nav-mobile-toggle{display:flex;}
+  }
+  @media (min-width:941px){ .nav-mobile-toggle{display:none !important;} }
+
+  /* ---------- PAGE HEADER ---------- */
+  .page-hero{
+    position:relative; overflow:hidden;
+    padding:64px 0 56px;
+  }
+  .page-hero .contours{position:absolute; inset:0; opacity:0.5; pointer-events:none; z-index:1;}
+  .page-hero .wrap{position:relative; z-index:2; max-width:760px;}
+  .page-hero h1{font-size:clamp(34px, 4.2vw, 52px); line-height:1.08; margin-top:14px;}
+  .page-hero p{margin-top:18px; font-size:17.5px; color:var(--ink-soft); max-width:56ch;}
+
+  section{padding:0 0 100px;}
+  .section-head{max-width:640px; margin-bottom:40px;}
+
+  /* ---------- CONTACT LAYOUT ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:0.95fr 1.05fr;
+    gap:48px;
+    align-items:start;
+  }
+  @media (max-width:900px){ .contact-grid{grid-template-columns:1fr;} }
+
+  /* ---------- CONTACT CHANNEL CARDS ---------- */
+  .channel-list{list-style:none; display:flex; flex-direction:column; gap:16px;}
+  .channel-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:24px 24px;
+    display:flex; gap:16px; align-items:flex-start;
+  }
+  .channel-icon{
+    width:40px; height:40px; flex-shrink:0;
+    border-radius:3px;
+    background:var(--moss-tint);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--moss-dark);
+  }
+  .channel-icon svg{width:19px; height:19px;}
+  .channel-card h4{font-size:16.5px; margin-bottom:4px;}
+  .channel-card p{font-size:14.5px; color:var(--ink-soft);}
+  .channel-card a.channel-value{
+    display:inline-block; margin-top:6px;
+    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px;
+    color:var(--moss-dark); text-decoration:none;
+  }
+  .channel-card a.channel-value:hover{color:var(--ink);}
+
+  .hours-panel{
+    margin-top:20px;
+    background:var(--sage);
+    border-radius:4px;
+    padding:22px 24px;
+  }
+  .hours-panel .mono{font-size:11.5px; color:var(--moss-dark); letter-spacing:.08em; display:block; margin-bottom:10px;}
+  .hours-row{display:flex; justify-content:space-between; font-size:14.5px; padding:6px 0; border-top:1px solid var(--sage-line);}
+  .hours-row:first-of-type{border-top:none;}
+  .hours-row span:first-child{color:var(--ink-soft);}
+  .hours-row span:last-child{font-family:'Space Grotesk',sans-serif; font-weight:600;}
+
+  /* ---------- FORM ---------- */
+  .form-panel{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:40px;
+  }
+  .form-panel h3{font-size:22px; margin-bottom:8px;}
+  .form-panel > p{font-size:15px; color:var(--ink-soft); margin-bottom:28px;}
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px;}
+  @media (max-width:560px){ .form-row{grid-template-columns:1fr;} }
+  .field{display:flex; flex-direction:column; gap:7px; margin-bottom:18px;}
+  .field label{
+    font-family:'Space Grotesk',sans-serif; font-size:13.5px; font-weight:600; color:var(--ink);
+  }
+  .field label .opt{font-weight:400; color:var(--ink-soft); font-family:'Source Serif 4', serif;}
+  .field input, .field select, .field textarea{
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:15.5px;
+    color:var(--ink);
+    background:var(--paper);
+    border:1px solid var(--sage-line);
+    border-radius:3px;
+    padding:12px 14px;
+    width:100%;
+  }
+  .field textarea{resize:vertical; min-height:120px;}
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:2px solid var(--moss); outline-offset:1px; border-color:var(--moss);
+  }
+  .field-error{font-size:12.5px; color:#A94B3F; display:none;}
+  .field.invalid input, .field.invalid select, .field.invalid textarea{border-color:#A94B3F;}
+  .field.invalid .field-error{display:block;}
+  .consent{display:flex; gap:10px; align-items:flex-start; margin-bottom:24px;}
+  .consent input{margin-top:4px; flex-shrink:0;}
+  .consent label{font-size:13.5px; color:var(--ink-soft); line-height:1.5;}
+  .consent a{color:var(--moss-dark); text-decoration:underline;}
+  .form-submit{width:100%; justify-content:center;}
+  .form-note{margin-top:14px; font-size:12.5px; color:var(--ink-soft); text-align:center;}
+  .form-success{
+    display:none;
+    text-align:center;
+    padding:40px 20px;
+  }
+  .form-success.show{display:block;}
+  .form-success svg{width:44px; height:44px; color:var(--moss); margin:0 auto 16px;}
+  .form-success h3{font-size:20px; margin-bottom:8px;}
+  .form-success p{font-size:15px; color:var(--ink-soft);}
+  #contactForm.hidden{display:none;}
+
+  /* ---------- QUICK LINKS ---------- */
+  .quicklinks{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:var(--sage-line);
+    border:1px solid var(--sage-line);
+    margin-top:64px;
+  }
+  .quicklink-cell{
+    background:var(--paper);
+    padding:28px 26px;
+    text-decoration:none;
+    display:block;
+  }
+  .quicklink-cell .mono{font-size:11px; color:var(--path); letter-spacing:.08em; display:block; margin-bottom:10px;}
+  .quicklink-cell h4{font-size:16.5px; margin-bottom:6px; display:flex; align-items:center; gap:8px;}
+  .quicklink-cell p{font-size:14px; color:var(--ink-soft);}
+  .quicklink-cell:hover{background:var(--paper-raised);}
+  @media (max-width:860px){ .quicklinks{grid-template-columns:1fr;} }
+
+  /* ---------- LIVE CHAT WIDGET ---------- */
+  .chat-toggle{
+    position:fixed;
+    bottom:26px; right:26px;
+    z-index:80;
+    width:58px; height:58px;
+    border-radius:50%;
+    background:var(--moss);
+    color:var(--paper-raised);
+    border:none;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    box-shadow:0 6px 20px rgba(21,34,26,0.22);
+    transition:transform .18s ease, background .18s ease;
+  }
+  .chat-toggle:hover{transform:translateY(-2px); background:var(--moss-dark);}
+  .chat-toggle svg{width:24px; height:24px;}
+  .chat-toggle .chat-dot{
+    position:absolute; top:2px; right:2px;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--path);
+    border:2px solid var(--paper-raised);
+  }
+
+  .chat-panel{
+    position:fixed;
+    bottom:96px; right:26px;
+    z-index:81;
+    width:340px;
+    max-width:calc(100vw - 40px);
+    max-height:min(480px, calc(100vh - 140px));
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:8px;
+    box-shadow:0 12px 40px rgba(21,34,26,0.18);
+    display:none;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .chat-panel.open{display:flex;}
+  .chat-head{
+    background:var(--ink);
+    color:var(--paper);
+    padding:16px 18px;
+    display:flex; align-items:center; justify-content:space-between;
+    flex-shrink:0;
+  }
+  .chat-head-info{display:flex; align-items:center; gap:10px;}
+  .chat-head-info .chat-avatar{
+    width:32px; height:32px; border-radius:50%;
+    background:var(--moss);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .chat-head-info .chat-avatar svg{width:16px; height:16px; color:var(--paper);}
+  .chat-head h4{color:var(--paper); font-size:15px; margin-bottom:1px;}
+  .chat-head .chat-status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:#9FBF9F;
+    display:flex; align-items:center; gap:5px;
+  }
+  .chat-status::before{content:""; width:6px; height:6px; border-radius:50%; background:#7CBF7C; display:inline-block;}
+  .chat-close{
+    background:none; border:none; color:var(--paper);
+    cursor:pointer; width:28px; height:28px;
+    display:flex; align-items:center; justify-content:center;
+    opacity:.8; flex-shrink:0;
+  }
+  .chat-close:hover{opacity:1;}
+  .chat-close svg{width:16px; height:16px;}
+  .chat-body{
+    flex:1; overflow-y:auto;
+    padding:18px;
+    display:flex; flex-direction:column; gap:12px;
+    background:var(--paper);
+  }
+  .chat-msg{
+    max-width:82%;
+    padding:10px 13px;
+    border-radius:10px;
+    font-size:14px; line-height:1.45;
+  }
+  .chat-msg.bot{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    align-self:flex-start;
+    border-bottom-left-radius:2px;
+  }
+  .chat-msg.user{
+    background:var(--moss);
+    color:var(--paper-raised);
+    align-self:flex-end;
+    border-bottom-right-radius:2px;
+  }
+  .chat-typing{
+    align-self:flex-start;
+    display:flex; gap:4px;
+    padding:12px 14px;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:10px;
+    border-bottom-left-radius:2px;
+  }
+  .chat-typing span{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--ink-soft);
+    opacity:.4;
+    animation:chatBlink 1.2s infinite ease-in-out;
+  }
+  .chat-typing span:nth-child(2){animation-delay:.2s;}
+  .chat-typing span:nth-child(3){animation-delay:.4s;}
+  @keyframes chatBlink{ 0%,80%,100%{opacity:.25;} 40%{opacity:.9;} }
+  .chat-foot{
+    flex-shrink:0;
+    border-top:1px solid var(--line);
+    padding:12px;
+    display:flex; gap:8px;
+    background:var(--paper-raised);
+  }
+  .chat-foot input{
+    flex:1;
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:14.5px;
+    border:1px solid var(--sage-line);
+    border-radius:4px;
+    padding:10px 12px;
+    background:var(--paper);
+    color:var(--ink);
+  }
+  .chat-foot input:focus{outline:2px solid var(--moss); outline-offset:1px;}
+  .chat-send{
+    width:40px; height:40px; flex-shrink:0;
+    border-radius:4px; border:none;
+    background:var(--moss); color:var(--paper-raised);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+  }
+  .chat-send:hover{background:var(--moss-dark);}
+  .chat-send svg{width:17px; height:17px;}
+  .chat-disclaimer{
+    font-size:11px; color:var(--ink-soft);
+    text-align:center; padding:8px 12px 12px;
+    background:var(--paper-raised);
+  }
+  @media (max-width:480px){
+    .chat-panel{
+      right:16px; left:16px; width:auto;
+      bottom:88px;
+    }
+    .chat-toggle{right:16px; bottom:16px;}
+  }
+
+  /* ---------- SAFETY BANNER ---------- */
+  .safety{
+    background:var(--path-tint);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:36px 0;
+  }
+  .safety .wrap{display:flex; gap:18px; align-items:flex-start;}
+  .safety svg{width:22px;height:22px;flex-shrink:0;color:var(--path); margin-top:2px;}
+  .safety p{font-size:14px; color:var(--ink-soft); max-width:90ch;}
+  .safety strong{color:var(--ink);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:#C6CCC1; padding:64px 0 32px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:44px;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .footer-logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700; font-size:19px; color:var(--paper);
+    display:flex; align-items:center; gap:8px; margin-bottom:14px;
+  }
+  .footer-grid p{font-size:14px; line-height:1.7; max-width:32ch;}
+  .footer-col h5{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:#8B9088; margin-bottom:16px;
+  }
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:10px;}
+  .footer-col a{text-decoration:none; font-size:14.5px; color:#C6CCC1; transition:color .15s ease;}
+  .footer-col a:hover{color:var(--paper);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
+    padding-top:28px;
+    font-size:12.5px; color:#7D8479;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  @media (max-width:860px){ .footer-grid{grid-template-columns:1fr 1fr; gap:32px;} }
+  @media (max-width:560px){ .footer-grid{grid-template-columns:1fr;} }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  }
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--ink); color:var(--paper);
+    padding:12px 18px; z-index:100; border-radius:2px;
+    font-family:'Space Grotesk',sans-serif; font-size:14px; text-decoration:none;
+  }
+  .skip-link:focus{left:16px; top:16px;}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Sari la conținutul principal</a>
+
+<header>
+  <nav class="wrap">
+    <a href="index.html" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none">
+        <path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="21" cy="6" r="2" fill="#A97A52"/>
+      </svg>
+      Veya Journey®
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html#how">Cum funcționează</a></li>
+      <li><a href="index.html#treatment">Medicamentul</a></li>
+      <li><a href="index.html#trust">Veya</a></li>
+      <li><a href="index.html#stories">Recenzii</a></li>
+      <li><a href="index.html#faq">Întrebări</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="portal-pacient.html" class="btn btn-ghost">Autentificare</a>
+      <a href="evaluare-eligibilitate.html" class="btn btn-primary">Începe evaluarea</a>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="Deschide meniul" aria-expanded="false" aria-controls="navLinks">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero" id="main-content">
+  <svg class="contours" viewBox="0 0 1180 400" fill="none" preserveAspectRatio="none">
+    <path d="M-50 320 C 200 270, 300 370, 550 300 S 900 220, 1250 280" stroke="#CDD2C1" stroke-width="1"/>
+    <path d="M-50 360 C 220 310, 320 410, 560 340 S 920 260, 1250 320" stroke="#CDD2C1" stroke-width="1"/>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow">Suntem aici să te ajutăm</p>
+    <h1>Contactează echipa Veya Journey</h1>
+    <p>Ai întrebări despre program, tratament sau contul tău? Scrie-ne sau alege una dintre variantele de mai jos — răspundem de obicei în aceeași zi lucrătoare.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="contact-grid">
+
+      <div class="contact-channels">
+        <ul class="channel-list">
+          <li class="channel-card">
+            <div class="channel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <h4>Telefon</h4>
+              <p>Luni–Vineri, 09:00–18:00</p>
+              <a class="channel-value" href="tel:0316114118">0316 114 118</a>
+            </div>
+          </li>
+          <li class="channel-card">
+            <div class="channel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
+            <div>
+              <h4>Chat live</h4>
+              <p>Cel mai rapid mod de a primi un răspuns, în timpul programului de suport.</p>
+              <a class="channel-value" href="#" id="openChatLink">Deschide chatul →</a>
+            </div>
+          </li>
+          <li class="channel-card">
+            <div class="channel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+            </div>
+            <div>
+              <h4>Email</h4>
+              <p>Pentru întrebări generale sau administrative</p>
+              <a class="channel-value" href="mailto:help@veyajourney.ro">help@veyajourney.ro</a>
+            </div>
+          </li>
+          <li class="channel-card">
+            <div class="channel-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            </div>
+            <div>
+              <h4>Contul tău de pacient</h4>
+              <p>Pentru mesaje către medicul tău sau întrebări despre tratament, folosește portalul securizat.</p>
+              <a class="channel-value" href="portal-pacient.html">Accesează portalul →</a>
+            </div>
+          </li>
+        </ul>
+
+        <div class="hours-panel">
+          <span class="mono">PROGRAM SUPORT</span>
+          <div class="hours-row"><span>Luni – Vineri</span><span>09:00 – 18:00</span></div>
+          <div class="hours-row"><span>Sâmbătă</span><span>10:00 – 14:00</span></div>
+          <div class="hours-row"><span>Duminică</span><span>Închis</span></div>
+        </div>
+      </div>
+
+      <div class="form-panel">
+        <h3>Trimite-ne un mesaj</h3>
+        <p>Completează formularul și revenim către tine în cel mai scurt timp posibil.</p>
+
+        <form id="contactForm" action="https://formspree.io/f/xjgnvqrn" method="POST" novalidate>
+          <div class="form-row">
+            <div class="field" id="field-name">
+              <label for="name">Nume complet</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+              <span class="field-error">Te rugăm introdu numele tău.</span>
+            </div>
+            <div class="field" id="field-email">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+              <span class="field-error">Te rugăm introdu o adresă de email validă.</span>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field" id="field-phone">
+              <label for="phone">Telefon <span class="opt">(opțional)</span></label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel">
+            </div>
+            <div class="field" id="field-subject">
+              <label for="subject">Subiect</label>
+              <select id="subject" name="subject" required>
+                <option value="">Alege un subiect</option>
+                <option value="program">Întrebare despre program</option>
+                <option value="tratament">Întrebare despre tratament</option>
+                <option value="abonament">Facturare / abonament</option>
+                <option value="altele">Altele</option>
+              </select>
+              <span class="field-error">Te rugăm alege un subiect.</span>
+            </div>
+          </div>
+          <div class="field" id="field-message">
+            <label for="message">Mesajul tău</label>
+            <textarea id="message" name="message" required></textarea>
+            <span class="field-error">Te rugăm scrie un mesaj.</span>
+          </div>
+          <div class="consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">Sunt de acord ca datele mele să fie folosite pentru a răspunde solicitării, conform <a href="politica-de-confidentialitate.html">Politicii de confidențialitate</a>.</label>
+          </div>
+          <input type="hidden" name="_subject" value="Mesaj nou de pe pagina de contact Veya Journey">
+          <button type="submit" class="btn btn-primary form-submit">Trimite mesajul <span class="btn-arrow">→</span></button>
+          <p class="form-note" id="formNote">Răspundem de obicei în aceeași zi lucrătoare.</p>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+          <h3>Mesaj trimis</h3>
+          <p>Îți mulțumim! Un membru al echipei Veya Journey te va contacta în curând.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="quicklinks">
+      <a class="quicklink-cell" href="index.html#faq">
+        <span class="mono">01</span>
+        <h4>Întrebări frecvente</h4>
+        <p>Răspunsuri rapide despre program, eligibilitate și tratament.</p>
+      </a>
+      <a class="quicklink-cell" href="evaluare-eligibilitate.html">
+        <span class="mono">02</span>
+        <h4>Evaluare de eligibilitate</h4>
+        <p>Verifică-ți eligibilitatea în aproximativ cinci minute.</p>
+      </a>
+      <a class="quicklink-cell" href="portal-pacient.html">
+        <span class="mono">03</span>
+        <h4>Portal pacient</h4>
+        <p>Autentifică-te pentru a discuta direct cu echipa medicală.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="safety">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+    <p><strong>Informații importante de siguranță.</strong> Medicamentele de tip GLP-1 sunt eliberate exclusiv pe bază de prescripție medicală și sunt indicate numai după o evaluare efectuată de un medic autorizat. Tratamentul nu este potrivit pentru toate persoanele și poate fi contraindicat în anumite situații, inclusiv în timpul sarcinii, alăptării sau în cazul unor afecțiuni medicale specifice. Pentru urgențe medicale, contactează serviciile de urgență sau medicul tău, nu acest formular de contact.</p>
+  </div>
+</div>
+
+<button class="chat-toggle" id="chatToggle" aria-label="Deschide chatul live" aria-expanded="false" aria-controls="chatPanel">
+  <span class="chat-dot"></span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel" role="dialog" aria-label="Chat live Veya Journey">
+  <div class="chat-head">
+    <div class="chat-head-info">
+      <div class="chat-avatar">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#F1EFE6" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div>
+        <h4>Echipa Veya Journey</h4>
+        <span class="chat-status">Online</span>
+      </div>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="Închide chatul">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="chat-msg bot">Bună! Sunt aici să te ajut cu întrebări despre programul Veya Journey. Cum te pot ajuta astăzi?</div>
+  </div>
+  <div class="chat-disclaimer">Chat demonstrativ pentru pagina de previzualizare — răspunsurile nu provin de la un agent real.</div>
+  <form class="chat-foot" id="chatForm">
+    <input type="text" id="chatInput" placeholder="Scrie un mesaj…" autocomplete="off">
+    <button type="submit" class="chat-send" aria-label="Trimite">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+    </button>
+  </form>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#8FAE93" stroke-width="2" stroke-linecap="round"/><circle cx="21" cy="6" r="2" fill="#A97A52"/></svg>
+          Veya Journey
+        </div>
+        <p>Slăbește cu încredere, alături de o echipă medicală dedicată. Fiecare plan de tratament este evaluat de un medic înainte de prescriere.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Program</h5>
+        <ul>
+          <li><a href="index.html#how">Cum funcționează</a></li>
+          <li><a href="index.html#treatment">Medicamentul</a></li>
+          <li><a href="index.html#eligibility">Eligibilitate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Companie</h5>
+        <ul>
+          <li><a href="portal-pacient.html">Contul meu</a></li>
+          <li><a href="index.html#trust">De ce Veya</a></li>
+          <li><a href="index.html#stories">Povești ale pacienților</a></li>
+          <li><a href="index.html#faq">Întrebări frecvente</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="politica-de-confidentialitate.html">Politica de confidențialitate</a></li>
+          <li><a href="termeni-si-conditii.html">Termeni și condiții</a></li>
+          <li><a href="guvernanta-clinica.html">Guvernanță clinică</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Veya Tech Ltd. dba Veya Journey®</span>
+      <span>0316 114 118 | help@veyajourney.ro</span>
+    </div>
+    <div class="footer-bottom">
+      <span>Prescripția dumneavoastră, atunci când este justificată din punct de vedere medical, este emisă de un medic autorizat afiliat HI DOCTOR AI SL. Hi-Doctor furnizează servicii de consultație medicală online prin intermediul unor medici licențiați și autorizați să practice medicina în Uniunea Europeană. Toate prescripțiile sunt emise exclusiv de medici înregistrați, în conformitate cu legislația aplicabilă a Uniunii Europene și cu legislația națională în vigoare.</span>
+    </div>
+    <div class="footer-bottom">
+      <span>Medicația dumneavoastră este eliberată și expediată de HYPERICI FARM SRL, farmacie autorizată cu sediul în județul Dâmbovița, România. Toate medicamentele sunt eliberate și distribuite în conformitate cu legislația farmaceutică și cu cerințele autorităților competente din România.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      var isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  var form = document.getElementById('contactForm');
+  var success = document.getElementById('formSuccess');
+
+  function setInvalid(fieldId, invalid){
+    var el = document.getElementById(fieldId);
+    if(el) el.classList.toggle('invalid', invalid);
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = document.getElementById('name');
+    var email = document.getElementById('email');
+    var subject = document.getElementById('subject');
+    var message = document.getElementById('message');
+    var consent = document.getElementById('consent');
+    var submitBtn = form.querySelector('.form-submit');
+    var note = document.getElementById('formNote');
+
+    var valid = true;
+
+    if(!name.value.trim()){ setInvalid('field-name', true); valid = false; } else { setInvalid('field-name', false); }
+
+    var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+    if(!emailOk){ setInvalid('field-email', true); valid = false; } else { setInvalid('field-email', false); }
+
+    if(!subject.value){ setInvalid('field-subject', true); valid = false; } else { setInvalid('field-subject', false); }
+
+    if(!message.value.trim()){ setInvalid('field-message', true); valid = false; } else { setInvalid('field-message', false); }
+
+    if(!consent.checked){ valid = false; consent.focus(); }
+
+    if(!valid) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Se trimite…';
+    note.textContent = '';
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function(response){
+      if(response.ok){
+        form.classList.add('hidden');
+        success.classList.add('show');
+        success.setAttribute('tabindex','-1');
+        success.focus();
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Trimite mesajul <span class="btn-arrow">→</span>';
+        note.textContent = 'A apărut o eroare la trimitere. Te rugăm încearcă din nou sau scrie-ne la help@veyajourney.ro.';
+      }
+    }).catch(function(){
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Trimite mesajul <span class="btn-arrow">→</span>';
+      note.textContent = 'A apărut o eroare la trimitere. Te rugăm încearcă din nou sau scrie-ne la help@veyajourney.ro.';
+    });
+  });
+
+  /* ---------- LIVE CHAT ---------- */
+  var chatToggle = document.getElementById('chatToggle');
+  var chatPanel = document.getElementById('chatPanel');
+  var chatClose = document.getElementById('chatClose');
+  var chatBody = document.getElementById('chatBody');
+  var chatForm = document.getElementById('chatForm');
+  var chatInput = document.getElementById('chatInput');
+  var openChatLink = document.getElementById('openChatLink');
+
+  var chatReplies = [
+    "Mulțumim pentru mesaj! Un membru al echipei îți va răspunde cât mai curând.",
+    "Pentru întrebări despre tratament sau doză, te rugăm să folosești portalul de pacient, unde poți vorbi direct cu echipa medicală.",
+    "Poți găsi multe răspunsuri rapide și în secțiunea de Întrebări frecvente de pe pagina principală.",
+    "Notat! Dacă preferi, ne poți contacta și la help@veyajourney.ro sau la 0316 114 118."
+  ];
+  var replyIndex = 0;
+
+  function openChat(){
+    chatPanel.classList.add('open');
+    chatToggle.setAttribute('aria-expanded','true');
+    chatInput.focus();
+  }
+  function closeChat(){
+    chatPanel.classList.remove('open');
+    chatToggle.setAttribute('aria-expanded','false');
+  }
+
+  chatToggle.addEventListener('click', function(){
+    chatPanel.classList.contains('open') ? closeChat() : openChat();
+  });
+  chatClose.addEventListener('click', closeChat);
+  if(openChatLink){
+    openChatLink.addEventListener('click', function(e){
+      e.preventDefault();
+      openChat();
+    });
+  }
+
+  function addMessage(text, who){
+    var msg = document.createElement('div');
+    msg.className = 'chat-msg ' + who;
+    msg.textContent = text;
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  chatForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    var text = chatInput.value.trim();
+    if(!text) return;
+    addMessage(text, 'user');
+    chatInput.value = '';
+
+    var typing = document.createElement('div');
+    typing.className = 'chat-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    chatBody.appendChild(typing);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    setTimeout(function(){
+      typing.remove();
+      addMessage(chatReplies[replyIndex % chatReplies.length], 'bot');
+      replyIndex++;
+    }, 900);
+  });
+</script>
+
+</body>
+</html>

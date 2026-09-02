@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ro-RO">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Începe-ți transformarea cu Veya Journey®</title>
+<meta name="description" content="Previzualizare concept: cum ar putea arăta Veya Journey odată ce retatrutida va fi autorizată în România. Nu este un serviciu activ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15221A;
+    --ink-soft:#3B4A3F;
+    --paper:#F1EFE6;
+    --paper-raised:#FBFAF5;
+    --sage:#E4E7DB;
+    --sage-line:#CDD2C1;
+    --moss:#4F6B53;
+    --moss-dark:#374A3B;
+    --moss-tint:#DDE5DC;
+    --path:#A97A52;
+    --path-tint:#EFE1D3;
+    --line: rgba(21,34,26,0.14);
+    --shadow: 0 1px 2px rgba(21,34,26,0.06);
+    --max: 1180px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', Georgia, serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  h1,h2,h3,h4,.display{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--ink);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--moss-dark);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:16px; height:1px; background:var(--path);
+    display:inline-block;
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  :focus-visible{outline:2px solid var(--moss); outline-offset:3px;}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:15px;
+    padding:14px 26px;
+    border-radius:2px;
+    border:1px solid transparent;
+    cursor:pointer;
+    text-decoration:none;
+    transition:transform .18s ease, background .18s ease, border-color .18s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--moss); color:var(--paper-raised);}
+  .btn-primary:hover{background:var(--moss-dark);}
+  .btn-ghost{background:transparent; border-color:var(--ink); color:var(--ink);}
+  .btn-ghost:hover{background:var(--ink); color:var(--paper);}
+  .btn-arrow{transition:transform .18s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,239,230,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .logo{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:20px;
+    display:flex; align-items:center; gap:9px;
+    text-decoration:none;
+  }
+  .logo-mark{
+    width:22px; height:22px;
+  }
+  .nav-links{display:flex; align-items:center; gap:22px; list-style:none; flex-wrap:nowrap;}
+  .nav-links a{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    text-decoration:none;
+    color:var(--ink-soft);
+    transition:color .15s ease;
+    white-space:nowrap;
+  }
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{display:flex; align-items:center; gap:12px; flex-shrink:0;}
+  .nav-cta .btn{white-space:nowrap;}
+  .logo{white-space:nowrap; flex-shrink:0;}
+  .nav-mobile-toggle{
+    display:none;
+    background:none; border:1px solid var(--line); border-radius:2px;
+    width:40px; height:40px; align-items:center; justify-content:center;
+    cursor:pointer; flex-shrink:0; color:var(--ink);
+  }
+
+  @media (max-width:1080px){
+    .nav-links{gap:16px;}
+  }
+
+  @media (max-width:940px){
+    .nav-links{
+      display:none;
+      position:absolute; top:76px; left:0; right:0;
+      background:var(--paper-raised);
+      border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:flex-start; gap:0;
+      padding:8px 0;
+    }
+    .nav-links.open{display:flex;}
+    .nav-links li{width:100%;}
+    .nav-links a{display:block; padding:14px 32px; width:100%;}
+    .nav-cta .btn-ghost{display:none;}
+    .nav-mobile-toggle{display:flex;}
+  }
+  @media (min-width:941px){
+    .nav-mobile-toggle{display:none !important;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:76px 0 40px;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:48px;
+    align-items:center;
+    position:relative;
+    z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(38px, 4.6vw, 62px);
+    line-height:1.05;
+    max-width:12ch;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--moss);
+  }
+  .hero-sub{
+    margin-top:22px;
+    font-size:18px;
+    color:var(--ink-soft);
+    max-width:44ch;
+  }
+  .hero-cta{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap; align-items:center;}
+  .hero-note{
+    margin-top:10px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:0.02em;
+  }
+  .trust-strip{
+    margin-top:44px;
+    display:flex; gap:28px; flex-wrap:wrap;
+    padding-top:24px;
+    border-top:1px solid var(--line);
+  }
+  .trust-item{
+    display:flex; align-items:center; gap:9px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    letter-spacing:0.01em;
+  }
+  .trust-item svg{width:16px; height:16px; flex-shrink:0; color:var(--moss);}
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio:1/1.02;
+  }
+  .hero-visual svg{width:100%; height:100%;}
+  .trail-dot{
+    fill:var(--path);
+  }
+  .hero-path{
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:draw 2.4s cubic-bezier(.4,0,.2,1) forwards .3s;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .hero-marker{
+    opacity:0;
+    animation:fadeInMarker .5s ease forwards;
+  }
+  .hero-marker.m1{animation-delay:.6s;}
+  .hero-marker.m2{animation-delay:1.3s;}
+  .hero-marker.m3{animation-delay:2.0s;}
+  .hero-marker.m4{animation-delay:2.5s;}
+  @keyframes fadeInMarker{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+  .hero-card{
+    position:absolute;
+    bottom:6%;
+    left:8%;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:16px 18px;
+    box-shadow:var(--shadow);
+    max-width:210px;
+  }
+  .hero-card .mono{font-size:11px; color:var(--moss-dark); letter-spacing:.08em;}
+  .hero-card .stat{font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:600; margin-top:4px;}
+  .hero-card .stat-label{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+
+  @media (max-width:900px){
+    .hero .wrap{grid-template-columns:1fr; gap:36px;}
+    .hero-visual{aspect-ratio:4/3; order:-1;}
+  }
+
+  /* ---------- CONTOUR BG TEXTURE ---------- */
+  .contours{
+    position:absolute; inset:0;
+    opacity:0.5;
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{padding:100px 0;}
+  .section-head{max-width:640px; margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,3vw,40px); margin-top:14px; line-height:1.12;}
+  .section-head p{margin-top:16px; color:var(--ink-soft); font-size:16.5px;}
+  .band{background:var(--sage);}
+  .band-ink{background:var(--ink); color:var(--paper);}
+  .band-ink .eyebrow{color:#B9C6BA;}
+  .band-ink .eyebrow::before{background:var(--path);}
+  .band-ink h2, .band-ink h3, .band-ink h4{color:var(--paper);}
+  .band-ink .section-head p{color:#C6CCC1;}
+
+  /* ---------- ELIGIBILITY QUICK CHECK ---------- */
+  .quickcheck{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:56px;
+    align-items:start;
+  }
+  .qc-list{list-style:none;}
+  .qc-list li{
+    display:flex; gap:16px;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .qc-list li:first-child{padding-top:0;}
+  .qc-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--path);
+    padding-top:3px;
+    flex-shrink:0;
+  }
+  .qc-list h4{font-size:16.5px; margin-bottom:4px;}
+  .qc-list p{font-size:15px; color:var(--ink-soft);}
+  .qc-panel{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:36px;
+  }
+  .qc-panel .eyebrow{margin-bottom:16px;}
+  .qc-panel h3{font-size:22px; line-height:1.3; margin-bottom:20px;}
+  .qc-panel ul{list-style:none; margin-bottom:26px;}
+  .qc-panel ul li{
+    display:flex; align-items:flex-start; gap:10px;
+    font-size:15px; color:var(--ink-soft);
+    padding:9px 0;
+  }
+  .qc-panel ul li svg{width:16px; height:16px; margin-top:3px; flex-shrink:0; color:var(--moss);}
+  @media (max-width:860px){ .quickcheck{grid-template-columns:1fr;} }
+
+  /* ---------- HOW IT WORKS: TRAIL ---------- */
+  .trail-wrap{position:relative; padding-top:20px;}
+  .trail-line-svg{position:absolute; top:0; left:0; width:100%; height:100%; z-index:0;}
+  .checkpoints{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+    position:relative;
+    z-index:1;
+  }
+  .checkpoint{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:26px 22px;
+    position:relative;
+  }
+  .checkpoint .mile{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--path);
+    margin-bottom:14px;
+    display:block;
+  }
+  .checkpoint h4{font-size:17.5px; margin-bottom:8px;}
+  .checkpoint p{font-size:14.5px; color:var(--ink-soft);}
+  .checkpoint-dot{
+    position:absolute; top:-9px; left:22px;
+    width:16px; height:16px;
+    border-radius:50%;
+    background:var(--moss);
+    border:3px solid var(--paper);
+  }
+  @media (max-width:900px){
+    .checkpoints{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    .checkpoints{grid-template-columns:1fr;}
+  }
+
+  /* ---------- PRODUCT SHOWCASE ---------- */
+  .product-showcase{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:56px;
+    align-items:center;
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:40px;
+    margin-bottom:64px;
+  }
+  .product-image{
+    background:#FFFFFF;
+    border-radius:4px;
+    padding:28px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .product-image img{
+    width:100%;
+    height:auto;
+    mix-blend-mode:multiply;
+  }
+  .soon-badge{
+    position:absolute;
+    top:14px; left:14px;
+    z-index:2;
+    background:var(--path);
+    color:var(--paper-raised);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:2px;
+  }
+  .product-info h3{font-size:28px; margin:16px 0 12px;}
+  .product-lede{font-size:16px; color:var(--ink-soft); margin-bottom:24px; max-width:42ch;}
+  .product-specs{list-style:none;}
+  .product-specs li{
+    display:flex; align-items:baseline; gap:12px;
+    font-size:14.5px; color:var(--ink-soft);
+    padding:10px 0;
+    border-top:1px solid var(--line);
+  }
+  .product-specs li:first-child{border-top:none;}
+  .product-specs .mono{font-size:11.5px; color:var(--path); flex-shrink:0;}
+  @media (max-width:900px){
+    .product-showcase{grid-template-columns:1fr; padding:28px;}
+    .product-image{padding:16px;}
+  }
+
+  /* ---------- TREATMENT CARDS ---------- */
+  .treat-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+  .treat-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:32px 28px;
+    display:flex; flex-direction:column;
+  }
+  .treat-card.featured{
+    border-color:var(--moss);
+    box-shadow:0 4px 24px rgba(21,34,26,0.08);
+  }
+  .treat-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--moss-dark);
+    background:var(--moss-tint);
+    padding:5px 10px;
+    border-radius:2px;
+    display:inline-block;
+    width:fit-content;
+    margin-bottom:18px;
+  }
+  .treat-card h3{font-size:22px; margin-bottom:6px;}
+  .treat-price{font-family:'Space Grotesk',sans-serif; font-size:15px; color:var(--ink-soft); margin-bottom:18px;}
+  .treat-price strong{font-size:26px; color:var(--ink); font-weight:600;}
+  .treat-card ul{list-style:none; margin-bottom:26px; flex-grow:1;}
+  .treat-card ul li{
+    display:flex; gap:9px; align-items:flex-start;
+    font-size:14.5px; color:var(--ink-soft);
+    padding:7px 0;
+  }
+  .treat-card ul li svg{width:15px;height:15px;margin-top:3px;flex-shrink:0;color:var(--moss);}
+  .treat-card .btn{width:100%; justify-content:center;}
+  @media (max-width:900px){ .treat-grid{grid-template-columns:1fr; max-width:420px;} }
+
+  /* ---------- TRUST / REGULATORY ---------- */
+  .trust-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--sage-line);
+    border:1px solid var(--sage-line);
+  }
+  .trust-cell{
+    background:var(--paper);
+    padding:32px 26px;
+  }
+  .trust-cell .mono{font-size:11.5px; color:var(--path); letter-spacing:.08em; margin-bottom:12px; display:block;}
+  .trust-cell h4{font-size:17px; margin-bottom:8px;}
+  .trust-cell p{font-size:14.5px; color:var(--ink-soft);}
+  @media (max-width:900px){ .trust-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .trust-grid{grid-template-columns:1fr;} }
+
+  /* ---------- STORIES ---------- */
+  .stories{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .story-card{
+    background:var(--paper-raised);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:28px;
+  }
+  .story-meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;}
+  .story-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15px;}
+  .story-stat{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--moss-dark);
+    background:var(--moss-tint);
+    padding:4px 9px; border-radius:2px;
+  }
+  .story-card p{font-size:15px; color:var(--ink-soft); font-style:italic;}
+  .story-foot{margin-top:16px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:#8B9088;}
+  @media (max-width:900px){ .stories{grid-template-columns:1fr; max-width:480px;} }
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:760px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;
+    text-align:left;
+    background:none; border:none;
+    padding:22px 0;
+    display:flex; justify-content:space-between; align-items:center;
+    cursor:pointer;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:17px; font-weight:500;
+    color:var(--ink);
+  }
+  .faq-q .plus{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:18px; color:var(--path);
+    transition:transform .25s ease;
+    flex-shrink:0; margin-left:20px;
+  }
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{
+    max-height:0; overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .faq-a p{padding-bottom:22px; color:var(--ink-soft); font-size:15.5px; max-width:66ch;}
+
+  /* ---------- FINAL CTA ---------- */
+  .final-cta{
+    text-align:center;
+    padding:110px 0;
+  }
+  .final-cta h2{font-size:clamp(30px,4vw,48px); max-width:16ch; margin:18px auto 0;}
+  .final-cta p{max-width:50ch; margin:18px auto 28px; color:var(--ink-soft);}
+
+  /* ---------- SAFETY BANNER ---------- */
+  .safety{
+    background:var(--path-tint);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    padding:36px 0;
+  }
+  .safety .wrap{display:flex; gap:18px; align-items:flex-start;}
+  .safety svg{width:22px;height:22px;flex-shrink:0;color:var(--path); margin-top:2px;}
+  .safety p{font-size:14px; color:var(--ink-soft); max-width:90ch;}
+  .safety strong{color:var(--ink);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:#C6CCC1; padding:64px 0 32px;}
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
+    gap:40px;
+    padding-bottom:44px;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .footer-logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700; font-size:19px; color:var(--paper);
+    display:flex; align-items:center; gap:8px; margin-bottom:14px;
+  }
+  .footer-grid p{font-size:14px; line-height:1.7; max-width:32ch;}
+  .footer-col h5{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:#8B9088; margin-bottom:16px;
+  }
+  .footer-col ul{list-style:none;}
+  .footer-col ul li{margin-bottom:10px;}
+  .footer-col a{text-decoration:none; font-size:14.5px; color:#C6CCC1; transition:color .15s ease;}
+  .footer-col a:hover{color:var(--paper);}
+  .footer-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
+    padding-top:28px;
+    font-size:12.5px; color:#7D8479;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  @media (max-width:860px){
+    .footer-grid{grid-template-columns:1fr 1fr; gap:32px;}
+  }
+  @media (max-width:560px){
+    .footer-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  }
+
+  .concept-ribbon{
+    background:var(--ink);
+    color:#DCE5D1;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:.02em;
+    text-align:center;
+    padding:9px 0;
+  }
+
+  .skip-link{
+    position:absolute; left:-999px; top:auto;
+    background:var(--ink); color:var(--paper);
+    padding:12px 18px; z-index:100; border-radius:2px;
+    font-family:'Space Grotesk',sans-serif; font-size:14px; text-decoration:none;
+  }
+  .skip-link:focus{left:16px; top:16px;}
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Sari la conținutul principal</a>
+
+<header>
+  <nav class="wrap">
+    <a href="#" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none">
+        <path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4F6B53" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="21" cy="6" r="2" fill="#A97A52"/>
+      </svg>
+      Veya Journey®
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#how">Cum funcționează</a></li>
+      <li><a href="#treatment">Medicamentul</a></li>
+      <li><a href="#trust">Veya</a></li>
+      <li><a href="#stories">Recenzii</a></li>
+      <li><a href="#faq">Întrebări</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="portal-pacient.html" class="btn btn-ghost">Autentificare</a>
+      <a href="evaluare-eligibilitate.html" class="btn btn-primary">Începe evaluarea</a>
+      <button class="nav-mobile-toggle" id="navToggle" aria-label="Deschide meniul" aria-expanded="false" aria-controls="navLinks">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<section class="hero" id="main-content">
+  <svg class="contours" viewBox="0 0 1180 600" fill="none" preserveAspectRatio="none">
+    <path d="M-50 500 C 200 450, 300 550, 550 480 S 900 400, 1250 460" stroke="#CDD2C1" stroke-width="1"/>
+    <path d="M-50 540 C 220 490, 320 590, 560 520 S 920 440, 1250 500" stroke="#CDD2C1" stroke-width="1"/>
+    <path d="M-50 460 C 180 410, 280 500, 540 440 S 880 360, 1250 420" stroke="#CDD2C1" stroke-width="1"/>
+  </svg>
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Începe-ți <em>transformarea</em></h1>
+      <p class="hero-sub">Slăbește mai inteligent cu Veya Journey — terapii GLP-1 și un program construit pentru rezultate de durată.</p>
+      <div class="hero-cta">
+        <a href="evaluare-eligibilitate.html" class="btn btn-primary">Verifică-ți eligibilitatea <span class="btn-arrow">→</span></a>
+        <a href="#how" class="btn btn-ghost">Vezi cum funcționează</a>
+      </div>
+      <p class="hero-note">Evaluare online gratuită de 5 minute · Răspuns în cel mult o zi</p>
+      <div class="trust-strip">
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>Anulezi oricând</div>
+        <div class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M8 7V5a4 4 0 018 0v2"/></svg>Livrare discretă</div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 420 440" fill="none">
+        <path class="hero-path" d="M40 60 C 120 90, 60 170, 140 200 S 260 260, 220 330 S 340 380, 380 420" stroke="#4F6B53" stroke-width="3" stroke-linecap="round"/>
+        <g class="hero-marker m1">
+          <circle cx="40" cy="60" r="6" class="trail-dot"/>
+        </g>
+        <g class="hero-marker m2">
+          <circle cx="140" cy="200" r="6" class="trail-dot"/>
+        </g>
+        <g class="hero-marker m3">
+          <circle cx="220" cy="330" r="6" class="trail-dot"/>
+        </g>
+        <g class="hero-marker m4">
+          <circle cx="380" cy="420" r="7" fill="#4F6B53"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Cum funcționează</p>
+      <h2>Patru etape, un singur drum</h2>
+      <p>Drumul este același pentru toată lumea; ritmul este stabilit de modul în care răspunde organismul tău.</p>
+    </div>
+    <div class="trail-wrap">
+      <div class="checkpoints">
+        <div class="checkpoint">
+          <span class="checkpoint-dot"></span>
+          <span class="mile">ETAPA 01 — ZIUA 1</span>
+          <h4>Completează-ți evaluarea</h4>
+          <p>Răspunde la întrebări despre sănătatea, obiectivele și istoricul tău medical. Durează aproximativ cinci minute, direct de pe telefon.</p>
+        </div>
+        <div class="checkpoint">
+          <span class="checkpoint-dot"></span>
+          <span class="mile">ETAPA 02 — ZIUA 1–2</span>
+          <h4>Se verifică eligibilitatea</h4>
+          <p>Îți verificăm eligibilitatea și stabilim împreună un plan de tratament, sau îți explicăm clar dacă încă nu este potrivit pentru tine.</p>
+        </div>
+        <div class="checkpoint">
+          <span class="checkpoint-dot"></span>
+          <span class="mile">ETAPA 03 — ZIUA 3–5</span>
+          <h4>Tratamentul ajunge la tine</h4>
+          <p>Livrat în ambalaj discret, cu control termic.</p>
+        </div>
+        <div class="checkpoint">
+          <span class="checkpoint-dot"></span>
+          <span class="mile">ETAPA 04 — EVALUĂM TRATAMENTUL</span>
+          <h4>Evaluări periodice care ajustează tratamentul</h4>
+          <p>Evaluări periodice pentru a urmări progresul, a discuta orice efect secundar și a ajusta doza dacă este necesar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="eligibility">
+  <div class="wrap">
+    <div class="quickcheck">
+      <div>
+        <p class="eyebrow">Înainte să începi</p>
+        <h2 style="margin-top:14px; font-size:32px; line-height:1.2;">Este acest drum potrivit pentru tine?</h2>
+        <ul class="qc-list">
+          <li>
+            <span class="qc-num">A</span>
+            <div>
+              <h4>IMC de 30+, sau 27+ cu o afecțiune asociată</h4>
+              <p>Acesta este pragul folosit pentru a evalua eligibilitatea pentru tratamentul cu retatrutidă.</p>
+            </div>
+          </li>
+          <li>
+            <span class="qc-num">B</span>
+            <div>
+              <h4>Vârsta de 18 ani sau peste</h4>
+              <p>Tratăm doar adulți.</p>
+            </div>
+          </li>
+          <li>
+            <span class="qc-num">C</span>
+            <div>
+              <h4>Fără sarcină, alăptare sau planificare a unei sarcini</h4>
+              <p>Retatrutida nu este potrivită în timpul sarcinii sau atunci când se încearcă o sarcină.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="qc-panel">
+        <p class="eyebrow">Verificare rapidă</p>
+        <h3>Prin această evaluare vom stabili dacă ești eligibil(ă) să începi tratamentul.</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Fără obligații de plată. Gratuit.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Verificat de un medic, nu de un algoritm.</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Dacă tratamentul nu este potrivit pentru tine, îți vom explica în mod clar de ce.</li>
+        </ul>
+        <a href="evaluare-eligibilitate.html" class="btn btn-primary" style="width:100%; justify-content:center;">Începe evaluarea gratuită</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="treatment">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Tratamentul</p>
+      <h2>Mounjaro®</h2>
+      <p>Planul tău de tratament este personalizat în urma unei evaluări efectuate de un medic Veya. Prețul include evaluările medicale periodice și livrarea, iar fiecare etapă a tratamentului este revizuită și aprobată de un medic înainte de expediere.</p>
+    </div>
+
+    <div class="product-showcase">
+      <div>
+         <img src="pen-photo.png" alt="Stiloul injector preumplut Veya Journey cu retatrutidă, doză de 12mg, furnizat de Eli Lilly and Company">      </div>
+      <div class="product-info">
+        <span class="treat-tag">Dispozitivul Veya</span>
+        <h3>Stiloul Veya® de la Eli Lilly®</h3>
+        <p class="product-lede">Un stilou injector preumplut, conceput pentru până la o lună de tratament — fără fiole și fără pași suplimentari de pregătire. Doza inițială, stabilită în urma evaluării medicale, este deja integrată în stilou. Stiloul este furnizat exclusiv farmaciei Veya de către Eli Lilly.</p>
+        <ul class="product-specs">
+          <li><span class="mono">01</span> Injecție săptămânală, ușor de administrat acasă.</li>
+          <li><span class="mono">02</span> Fereastra de dozare îți permite să verifici dintr-o privire concentrația prescrisă.</li>
+          <li><span class="mono">03</span> Livrat în ambalajul personalizat Veya®, cu control termic, direct din farmacia noastră, în condiții care asigură integritatea produsului.</li>
+          <li><span class="mono">04</span> Ghid complet de administrare inclus.</li>
+        </ul>
+        <p class="hero-note" style="margin-top:22px;"> Disponibil în concentrații de la 1 mg la 12 mg. Doza potrivită pentru tine este stabilită și monitorizată de un medic — niciodată aleasă pe cont propriu.</p>
+      </div>
+    </div>
+
+    <div class="treat-grid">
+      <div class="treat-card">
+        <span class="treat-tag">Primii pași</span>
+        <h3>Evaluare Gratuită</h3>
+        <div class="treat-price">De la <strong>Gratuit</strong></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Evaluare Medicală Online</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Verificarea Eligibilității</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Recomandare de Plan Personalizat</li>
+        </ul>
+        <a href="evaluare-eligibilitate.html" class="btn btn-ghost">Începe evaluarea</a>
+      </div>
+      <div class="treat-card featured">
+        <span class="treat-tag">Cel mai ales</span>
+        <h3>Veya® Standard</h3>
+        <div class="treat-price">De la <strong>649.90 lei</strong>/lună</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Retatrutidă sau Mounjaro®</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Evaluări Lunare</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Livrare Rapidă</li>
+        </ul>
+        <a href="evaluare-eligibilitate.html" class="btn btn-primary">Începe evaluarea</a>
+      </div>
+      <div class="treat-card">
+        <span class="treat-tag">Sprijin complet</span>
+        <h3>Veya® Plus</h3>
+        <div class="treat-price">De la <strong>899.90 lei</strong>/lună</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Tot ce include Veya® Standard</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Coaching Nutrițional Individual</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Urmărirea Obiceiurilor și a Progresului</li>
+        </ul>
+        <a href="evaluare-eligibilitate.html" class="btn btn-ghost">Începe evaluarea</a>
+      </div>
+    </div>
+    <p style="margin-top:22px; font-size:13px; color:var(--ink-soft);">Fiecare tratament este eliberat doar după evaluarea și aprobarea unui medic Veya®. Prețurile afișate sunt orientative și sunt confirmate după încheierea evaluării medicale.</p>
+  </div>
+</section>
+
+<section class="band-ink" id="trust">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">De ce Veya</p>
+      <h2>Conceput pentru siguranță. Creat pentru încredere.</h2>
+      <p>Tratamentul pentru gestionarea greutății este un act medical, nu un abonament obișnuit. Iată ce înseamnă acest lucru în practică.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="trust-grid">
+      <div class="trust-cell" style="background:var(--ink);">
+        <span class="mono">01</span>
+        <h4 style="color:var(--paper);">O farmacie autorizată în spatele fiecărei comenzi.</h4>
+        <p style="color:#B9C0B4;">Niciun tratament nu este expediat fără verificare. Fiecare comandă este eliberată și expediată de farmacia Veya®, o farmacie autorizată din România.</p>
+      </div>
+      <div class="trust-cell" style="background:var(--ink);">
+        <span class="mono">02</span>
+        <h4 style="color:var(--paper);">Un medic din rețeaua Veya® îți evaluează solicitarea.</h4>
+        <p style="color:#B9C0B4;">Informațiile pe care ni le furnizezi sunt evaluate de un medic calificat, nu doar de un algoritm.</p>
+      </div>
+      <div class="trust-cell" style="background:var(--ink);">
+        <span class="mono">03</span>
+        <h4 style="color:var(--paper);">Aceleași standarde medicale. Într-un format mai simplu.</h4>
+        <p style="color:#B9C0B4;">Serviciul nostru este autorizat și supus acelorași cerințe de reglementare și control ca orice alt furnizor de servicii medicale din România.</p>
+      </div>
+      <div class="trust-cell" style="background:var(--ink);">
+        <span class="mono">04</span>
+        <h4 style="color:var(--paper);">Datele tale rămân ale tale</h4>
+        <p style="color:#B9C0B4;">Datele tale sunt gestionate în conformitate cu GDPR și tratate cu cele mai înalte standarde de confidențialitate. Nu sunt niciodată vândute unor terți.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stories">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Rezultatele comunității Veya®</p>
+      <h2>Fiecare parcurs este unic. Fiecare progres contează.</h2>
+      <p>Rezultatele diferă de la o persoană la alta și depind de greutatea inițială, aderența la tratament și răspunsul individual al organismului.</p>
+    </div>
+    <div class="stories">
+      <div class="story-card">
+        <div class="story-meta">
+          <span class="story-name">Elena M.</span>
+          <span class="story-stat">−11 kg · 6 luni</span>
+        </div>
+        <p>„Evaluările periodice au făcut diferența. Am avut parte de monitorizare și îndrumare pe tot parcursul tratamentului, nu doar de livrarea medicamentului."</p>
+        <div class="story-foot">PACIENT VERIFICAT · CLUJ-NAPOCA</div>
+      </div>
+      <div class="story-card">
+        <div class="story-meta">
+          <span class="story-name">Daniel R.</span>
+          <span class="story-stat">−8 kg · 3 luni</span>
+        </div>
+        <p>„La început aveam emoții din cauza posibilelor efecte secundare. Doza mi-a fost ajustată pe parcursul tratamentului, iar fiecare decizie mi-a fost explicată clar."</p>
+        <div class="story-foot">PACIENT VERIFICAT · TIMIȘOARA · Răspuns excelent la tratament.</div>
+      </div>
+      <div class="story-card">
+        <div class="story-meta">
+          <span class="story-name">Ioana O.</span>
+          <span class="story-stat">−31 kg · 12 luni</span>
+        </div>
+        <p>Mi-a fost prescris Mounjaro, iar organismul meu a răspuns foarte bine la tratament. La început am avut câteva efecte secundare ușoare, însă acestea s-au diminuat în timp. Am urmat și recomandările privind alimentația, ceea ce m-a ajutat să îmi susțin progresul pe parcursul tratamentului.</p>
+        <div class="story-foot">PACIENT VERIFICAT · BUCUREȘTI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="band">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Întrebări frecvente</p>
+      <h2>Tot ce trebuie să știi înainte de a începe</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">De ce Retatrutidă și Mounjaro®, comparativ cu alte tratamente din clasa GLP-1?
+ <span class="plus">+</span></button>
+        <div class="faq-a"><p>Retatrutida și Mounjaro® se numără printre cele mai eficiente tratamente disponibile sau aflate în dezvoltare pentru gestionarea greutății, conform dovezilor clinice existente. Mounjaro® este disponibil pe bază de prescripție medicală pentru pacienții eligibili, în urma unei evaluări efectuate de un medic.
+
+Prin colaborarea Veya® cu Eli Lilly®, pacienții eligibili pot fi evaluați și pentru participarea la un studiu clinic cu Retatrutidă. Accesul la Retatrutidă este disponibil exclusiv în cadrul acestui studiu clinic și este condiționat de îndeplinirea criteriilor de eligibilitate stabilite de protocolul de cercetare.
+</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Trebuie să merg mai întâi la medicul de familie? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Nu. Totuși, îți vom solicita datele medicului de familie pentru a-l putea informa, cu acordul tău, despre tratamentul prescris. Este o bună practică medicală, care contribuie la continuitatea îngrijirii și la o coordonare mai bună a tratamentului.
+</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Ce se întâmplă dacă tratamentul nu este potrivit pentru mine?
+ <span class="plus">+</span></button>
+        <div class="faq-a"><p>Dacă, în urma evaluării medicale, medicul stabilește că tratamentul nu este potrivit pentru tine, acesta nu va fi prescris. În funcție de situația ta, este posibil să primești recomandări pentru investigații suplimentare, modificări ale stilului de viață sau alte opțiuni terapeutice. Prioritatea noastră este să recomandăm doar tratamente care sunt sigure și adecvate pentru fiecare pacient.
+</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Pot pune pauză sau anula abonamentul? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Da. Poți pune pauză sau anula planul în orice moment. Dacă alegi să întrerupi tratamentul, îți recomandăm să discuți mai întâi cu medicul tău, pentru a te asigura că decizia este potrivită pentru situația ta și că tratamentul este întrerupt în siguranță..</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">La ce efecte secundare ar trebui să mă aștept? <span class="plus">+</span></button>
+        <div class="faq-a"><p>Cele mai frecvente efecte secundare sunt de natură gastrointestinală și pot include greață, vărsături, diaree, constipație sau disconfort abdominal. Acestea sunt, de regulă, ușoare până la moderate și tind să se diminueze pe măsură ce organismul se adaptează la tratament. Medicul îți va explica la ce să te aștepți și îți va monitoriza evoluția pe parcursul tratamentului.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta" id="start">
+  <div class="wrap">
+    <p class="eyebrow" style="justify-content:center;">Gata când ești și tu</p>
+    <h2>Drumul tău începe cu o evaluare de cinci minute.</h2>
+    <p>Gratuită, confidențială și cu răspuns în 24 de ore.</p>
+    <a href="evaluare-eligibilitate.html" class="btn btn-primary">Începe evaluarea <span class="btn-arrow">→</span></a>
+  </div>
+</section>
+
+<div class="safety">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+    <p><strong>Informații importante de siguranță.</strong> Medicamentele de tip GLP-1 sunt elibereate exclusiv pe bază de prescripție medicală și sunt indicate numai după o evaluare efectuată de un medic autorizat. Tratamentul nu este potrivit pentru toate persoanele și poate fi contraindicat în anumite situații, inclusiv în timpul sarcinii, alăptării sau în cazul unor afecțiuni medicale specifice.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#8FAE93" stroke-width="2" stroke-linecap="round"/><circle cx="21" cy="6" r="2" fill="#A97A52"/></svg>
+          Veya Journey
+        </div>
+        <p>Slăbește cu încredere, alături de o echipă medicală dedicată. Fiecare plan de tratament este evaluat de un medic înainte de prescriere.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Program</h5>
+        <ul>
+          <li><a href="#how">Cum funcționează</a></li>
+          <li><a href="#treatment">Medicamentul</a></li>
+          <li><a href="#eligibility">Eligibilitate</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Companie</h5>
+        <ul>
+          <li><a href="portal-pacient.html">Contul meu</a></li>
+          <li><a href="#trust">De ce Veya</a></li>
+          <li><a href="#stories">Povești ale pacienților</a></li>
+          <li><a href="#faq">Întrebări frecvente</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="politica-de-confidentialitate.html">Politica de confidențialitate</a></li>
+          <li><a href="termeni-si-conditii.html">Termeni și condiții</a></li>
+          <li><a href="guvernanta-clinica.html">Guvernanță clinică</a></li>
+          <li><a href="anpc.html">ANPC</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Veya Tech Ltd. dba Veya Journey®</span>
+      <span>0316 114 118 | help@veyajourney.ro</span>
+    </div>
+    <div class="footer-bottom">
+      <span>Prescripția dumneavoastră, atunci când este justificată din punct de vedere medical, este emisă de un medic autorizat afiliat HI DOCTOR AI SL. Hi-Doctor furnizează servicii de consultație medicală online prin intermediul unor medici licențiați și autorizați să practice medicina în Uniunea Europeană. Toate prescripțiile sunt emise exclusiv de medici înregistrați, în conformitate cu legislația aplicabilă a Uniunii Europene și cu legislația națională în vigoare.</span>
+    </div>
+     <div class="footer-bottom">
+      <span>Medicația dumneavoastră este eliberată și expediată de HYPERICI FARM SRL, farmacie autorizată cu sediul în județul Dâmbovița, România. Toate medicamentele sunt eliberate și distribuite în conformitate cu legislația farmaceutică și cu cerințele autorităților competente din România.</span>
+    </div>
+
+  </div>
+</footer>
+
+<script>
+  var navToggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  if(navToggle && navLinks){
+    navToggle.addEventListener('click', function(){
+      var isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    navLinks.querySelectorAll('a').forEach(function(link){
+      link.addEventListener('click', function(){
+        navLinks.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  document.querySelectorAll('.faq-q').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var item = btn.closest('.faq-item');
+      var answer = item.querySelector('.faq-a');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(openItem){
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      if(isOpen){
+        item.classList.remove('open');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('open');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
