@@ -36,6 +36,12 @@
     -webkit-font-smoothing:antialiased;
   }
   img{max-width:100%; display:block;}
+  .protected-img{
+    -webkit-user-drag:none; user-drag:none;
+    -webkit-user-select:none; user-select:none;
+    -webkit-touch-callout:none;
+    pointer-events:none;
+  }
   a{color:inherit;}
   .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
   h1,h2,h3,h4,.display{
@@ -564,6 +570,28 @@
   .footer-col ul li{margin-bottom:10px;}
   .footer-col a{text-decoration:none; font-size:14.5px; color:#C6CCC1; transition:color .15s ease;}
   .footer-col a:hover{color:var(--paper);}
+  .footer-payments{
+    padding:28px 0;
+    border-bottom:1px solid rgba(255,255,255,0.12);
+  }
+  .pay-row{
+    display:flex; flex-wrap:wrap; align-items:center;
+    gap:18px 28px;
+  }
+  .pay-group{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+  .pay-sep{width:1px; height:28px; background:rgba(255,255,255,0.14);}
+  .pay-label{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:14px; font-weight:500; color:#C6CCC1;
+  }
+  .pay-logo{height:28px; width:auto; max-width:100%; display:block;}
+  .pay-logo.cards{height:34px;}
+  .pay-logo.klarna{height:20px;}
+  .pay-note{
+    margin-top:16px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px; color:#7D8479;
+  }
   .footer-bottom{
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:16px;
     padding-top:28px;
@@ -572,6 +600,10 @@
   }
   @media (max-width:860px){
     .footer-grid{grid-template-columns:1fr 1fr; gap:32px;}
+  }
+  @media (max-width:640px){
+    .pay-sep{display:none;}
+    .pay-row{flex-direction:column; align-items:flex-start;}
   }
   @media (max-width:560px){
     .footer-grid{grid-template-columns:1fr;}
@@ -802,7 +834,7 @@
 
     <div class="product-showcase">
       <div>
-         <img src="pen-photo.png" alt="Stiloul injector preumplut Veya Journey cu Mounjaro®, doză de 12mg, furnizat de Eli Lilly and Company">      </div>
+         <img class="protected-img" src="pen-photo.png" alt="Stiloul injector preumplut Veya Journey cu Mounjaro®, doză de 12mg, furnizat de Eli Lilly and Company" draggable="false">      </div>
       <div class="product-info">
         <span class="treat-tag">Dispozitivul Veya</span>
         <h3>Stiloul Veya®</h3>
@@ -1015,6 +1047,17 @@
         </ul>
       </div>
     </div>
+    <div class="footer-payments">
+      <div class="pay-row">
+        <img class="pay-logo cards protected-img" src="cards.png" alt="Carduri acceptate: American Express, Mastercard, Visa" width="417" height="82" loading="lazy" decoding="async" draggable="false">
+        <span class="pay-sep" aria-hidden="true"></span>
+        <div class="pay-group">
+          <span class="pay-label">Plătește în rate cu Klarna</span>
+          <img class="pay-logo klarna protected-img" src="https://myveyajourney.com/images/klarna.svg" alt="Klarna" loading="lazy" decoding="async" draggable="false">
+        </div>
+      </div>
+      <p class="pay-note">Plățile sunt procesate de Stripe</p>
+    </div>
     <div class="footer-bottom">
       <span>© 2026 Veya Tech Ltd. dba Veya Journey®</span>
       <span>0750 496 068 | help@myveyajourney.com</span>
@@ -1039,6 +1082,18 @@
   });
   // Fallback in case the load event is delayed or already fired
   setTimeout(hideLoader, 4000);
+
+  // Discourage saving/dragging of protected images
+  (function(){
+    var imgs = document.querySelectorAll('img.protected-img');
+    imgs.forEach(function(img){
+      var host = img.parentElement;
+      ['contextmenu','dragstart'].forEach(function(evt){
+        img.addEventListener(evt, function(e){ e.preventDefault(); });
+        if(host) host.addEventListener(evt, function(e){ e.preventDefault(); });
+      });
+    });
+  })();
 
   var navToggle = document.getElementById('navToggle');
   var navLinks = document.getElementById('navLinks');
